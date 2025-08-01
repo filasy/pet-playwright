@@ -1,0 +1,58 @@
+- navigation "Облегченная панель навигации":
+  - list:
+    - listitem:
+      - link "Главная": Главная …
+    - listitem:
+      - link "RUTUBE для блогеров …":
+        - /url: /for_creators
+    - listitem:
+      - link "Каталог …":
+        - /url: /categories/
+    - listitem:
+      - link "Популярное …":
+        - /url: /feeds/popular/
+    - listitem:
+      - link "В топе …":
+        - /url: /feeds/top/
+    - listitem:
+      - link "Shorts …":
+        - /url: /shorts/
+    - listitem:
+      - link "ТВ онлайн …":
+        - /url: /feeds/live/
+    - listitem:
+      - link "Трансляции …":
+        - /url: /feeds/stream/
+    - listitem:
+      - link "Моё …":
+        - /url: /my/
+    - listitem:
+      - link "Фильмы …":
+        - /url: /feeds/movies/
+    - listitem:
+      - link "RUTUBE x PREMIER …":
+        - /url: /feeds/premier/
+    - listitem:
+      - link "Сезон контента 2.0 …":
+        - /url: /feeds/content_seson_2/
+  - separator
+  - list:
+    - listitem:
+      - link "Подписки …":
+        - /url: /my/subscriptions/
+    - listitem:
+      - link "История просмотра …":
+        - /url: /my/history/
+    - listitem:
+      - link "Плейлисты …":
+        - /url: /my/playlists/
+    - listitem:
+      - link "Смотреть позже …":
+        - /url: /my/future/
+    - listitem:
+      - link "Комментарии …":
+        - /url: /my/comments/
+    - listitem:
+      - link "Понравилось …":
+        - /url: /my/liked/
+  - separator
