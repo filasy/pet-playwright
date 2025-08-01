@@ -1,5 +1,11 @@
 import { test } from '../../fixtures/App';
 
+test.beforeEach(async ({ app }) => {
+  await app.mainPage.visit();
+  await app.mainPage.closeCoockeisAlert();
+  await app.mainPage.closeAdvertisementModal();
+});
+
 test.describe(
   'Доступность элементов',
   {
@@ -10,11 +16,6 @@ test.describe(
     },
   },
   () => {
-    test.beforeEach(async ({ app }) => {
-      await app.mainPage.visit();
-      await app.mainPage.closeCoockeisAlert();
-      await app.mainPage.closeAdvertisementModal();
-    });
     test('Проверить доступность элементов бокового меню', async ({ app }) => {
       await app.mainPage.assertMenuAriaSnapshot();
     });
@@ -36,5 +37,15 @@ test.describe(
       await app.mainPage.openAuthorisationModal();
       await app.mainPage.assertAuthorizationModalAriaSnapshot();
     });
+    test('Проверить доступность элементов развернутого меню', async ({ app }) => {
+      await app.mainPage.openFullMenu();
+      await app.mainPage.assertFullMenuAriaSnapshot;
+    });
   },
 );
+
+test('Проверить переключение темы', async ({ app }) => {
+  await app.mainPage.assertTheme('dark2021');
+  await app.mainPage.changeThemeToWhite();
+  await app.mainPage.assertTheme('white2022');
+});

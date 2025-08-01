@@ -12,6 +12,9 @@ export class MainPage extends BasePage {
   private readonly headerAddButtonPopupListLocator: Locator;
   private readonly headerNotoficationPopupLocator: Locator;
   private readonly authorizationModalLocator: Locator;
+  private readonly headerMenuButtonLocator: Locator;
+  private readonly openMenuAriaLocator: Locator;
+  private readonly changeThemeButtonLocator: Locator;
   constructor(page: Page) {
     super(page, '/');
     this.headerLocator = this.page.getByRole('banner');
@@ -23,25 +26,47 @@ export class MainPage extends BasePage {
       })
       .nth(1);
     this.menuLocator = this.page.getByLabel('Облегченная панель навигации');
-    this.headerAddButtonLocator = this.page.getByRole('button', { name: 'Добавить' })
-    this.headerNotoficationButtonLocator = this.page.getByRole('button', { name: 'Уведомления' })
-    this.headerLoginButtonLocator = this.page.getByRole('button', { name: 'Вход и регистрация' })
-    this.headerAddButtonPopupListLocator = this.page.locator('.wdp-header-right-module__uploader ul')
-    this.headerNotoficationPopupLocator = this.page.locator('.wdp-notifications-popup-module__wrapper')
-    this.authorizationModalLocator = this.page.locator('iframe[title="Multipass"]').contentFrame().locator('div[role=form]')
+    this.headerAddButtonLocator = this.page.getByRole('button', { name: 'Добавить' });
+    this.headerNotoficationButtonLocator = this.page.getByRole('button', { name: 'Уведомления' });
+    this.headerLoginButtonLocator = this.page.getByRole('button', { name: 'Вход и регистрация' });
+    this.headerAddButtonPopupListLocator = this.page.locator(
+      '.wdp-header-right-module__uploader ul',
+    );
+    this.headerNotoficationPopupLocator = this.page.locator(
+      '.wdp-notifications-popup-module__wrapper',
+    );
+    this.authorizationModalLocator = this.page
+      .locator('iframe[title="Multipass"]')
+      .contentFrame()
+      .locator('div[role=form]');
+    this.headerMenuButtonLocator = this.page.getByRole('button', {
+      name: 'Открыть меню навигации',
+    });
+    this.openMenuAriaLocator = this.page.locator('.menu-content-module__menuOpen');
+    this.changeThemeButtonLocator = this.page.getByRole('button', {
+      name: 'Переключить на светлую тему',
+    });
   }
 
   @step()
-  async openAddPopupList(){
-    this.headerAddButtonLocator.click()
+  async openAddPopupList() {
+    this.headerAddButtonLocator.click();
   }
   @step()
-  async openNotificationdPopupList(){
-    this.headerNotoficationButtonLocator.click()
-  }  
+  async openNotificationdPopupList() {
+    this.headerNotoficationButtonLocator.click();
+  }
   @step()
-  async openAuthorisationModal(){
-    this.headerLoginButtonLocator.click()
+  async openAuthorisationModal() {
+    this.headerLoginButtonLocator.click();
+  }
+  @step()
+  async openFullMenu() {
+    this.headerMenuButtonLocator.click();
+  }
+  @step()
+  async changeThemeToWhite() {
+    this.changeThemeButtonLocator.click();
   }
 
   //assetrions
@@ -68,17 +93,27 @@ export class MainPage extends BasePage {
     await expect(this.headerAddButtonPopupListLocator).toMatchAriaSnapshot({
       name: 'addButtonPopup.aria.yml',
     });
-  }  
+  }
   @step()
   async assertNotificationPopupListAriaSnapshot() {
     await expect(this.headerNotoficationPopupLocator).toMatchAriaSnapshot({
       name: 'notoficationPopup.aria.yml',
     });
-  } 
+  }
   @step()
   async assertAuthorizationModalAriaSnapshot() {
     await expect(this.authorizationModalLocator).toMatchAriaSnapshot({
       name: 'authorizationModal.aria.yml',
     });
-  }     
+  }
+  @step()
+  async assertFullMenuAriaSnapshot() {
+    await expect(this.openMenuAriaLocator).toMatchAriaSnapshot({
+      name: 'fullMenu.aria.yml',
+    });
+  }
+  @step()
+  async assertTheme(attributeValue: 'dark2021' | 'white2022') {
+    await expect(this.page.locator('html')).toHaveAttribute('data-pen-theme', attributeValue);
+  }
 }
