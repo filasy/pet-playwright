@@ -18,6 +18,6 @@ export const test = baseTest.extend<MyFixture>({
     async ({ page }, use) => {
       await use(new App(page));
     },
-    { title: 'Create POM' },
+    { title: 'POM' },
   ],
 });
