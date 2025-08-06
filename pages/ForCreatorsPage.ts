@@ -1,0 +1,54 @@
+import { expect, Locator, Page } from '@playwright/test';
+import { BasePage } from './BasePage';
+import { step } from '../utils/step_decorator';
+
+export class ForCreatorsPage extends BasePage {
+  private readonly pageContentLocator: Locator;
+  static readonly testParams = [
+    {
+      url: 'https://rutube.ru/for_creators/#main',
+      screnshotName: 'mainTab.png',
+      testName: 'Главная',
+    },
+    {
+      url: 'https://rutube.ru/for_creators/#steps',
+      screnshotName: 'stepsTab.png',
+      testName: 'Первые шаги',
+    },
+    {
+      url: 'https://rutube.ru/for_creators/#faq',
+      screnshotName: 'faqTab.png',
+      testName: 'Как развивать канал',
+    },
+    {
+      url: 'https://rutube.ru/for_creators/#monetization',
+      screnshotName: 'monetizationTab.png',
+      testName: 'Монетизация',
+    },
+    {
+      url: 'https://rutube.ru/for_creators/#rules',
+      screnshotName: 'rulesTab.png',
+      testName: 'Правила',
+    },
+    {
+      url: 'https://rutube.ru/for_creators/#team',
+      screnshotName: 'teamTab.png',
+      testName: 'Команда R',
+    },
+  ];
+  constructor(page: Page) {
+    super(page, '/for_creators');
+    this.pageContentLocator = this.page.locator('#___gatsby');
+  }
+
+  //assertions
+  @step()
+  async assertPageLayoutScrenshot(screnshotName: string) {
+    await this.checkLayoutByScreenshot(this.pageContentLocator, screnshotName);
+  }
+
+  @step()
+  async open(url: string) {
+    await this.page.goto(url);
+  }
+}

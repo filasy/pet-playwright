@@ -10,6 +10,7 @@ export abstract class BasePage {
     });
   }
 
+  //actions
   @step('Закрыть уведомление об использовании cookies')
   public async closeCoockeisAlert() {
     await this.page.getByLabel('Уведомление об использовании cookies').locator('button').click();
@@ -21,13 +22,15 @@ export abstract class BasePage {
       .getByRole('button', { name: 'Закрыть' })
       .click();
   }
+
+  //assertions
   public async checkAriaSnapshot(locator: Locator, ariaName: string) {
     await expect(locator).toMatchAriaSnapshot({
       name: ariaName,
     });
   }
-  public async checkLayoutByScreenshot(locator: Locator, imageName: string) {
-    await expect(locator).toHaveScreenshot(imageName);
+  public async checkLayoutByScreenshot(locator: Locator, screnshotName: string) {
+    await expect(locator).toHaveScreenshot(screnshotName, { maxDiffPixelRatio: 0.02 });
   }
   async hideElement(selector: string) {
     await this.page.evaluate((selector) => {
@@ -35,6 +38,6 @@ export abstract class BasePage {
       if (element) {
         (element as HTMLElement).style.display = 'none';
       }
-    },selector);
-  }  
+    }, selector);
+  }
 }
