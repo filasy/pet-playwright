@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
-
 import dotenv from 'dotenv';
 import path from 'path';
+
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const isCI = !!process.env.CI;
@@ -18,6 +18,7 @@ export default defineConfig({
     isCI
       ? ['github']
       : ['html', { outputFolder: '.test/spec/html_report', open: 'always', noSnippets: true }],
+    ['./utils/slowStepReporter.ts'],
   ],
   use: {
     baseURL: 'https://rutube.ru',
