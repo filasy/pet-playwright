@@ -26,6 +26,6 @@ jobs:
       if: ${{ !cancelled() }}
       with:
         name: playwright-report-html
-        path: .test/spec/
+        path: .test/spec/html_report
         retention-days: 7
         overwrite: true  
