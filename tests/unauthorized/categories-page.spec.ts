@@ -1,5 +1,5 @@
 import { test } from '../../fixtures/fixtures';
 
-test('Проверка layout', async ({ categotiesPage }) => {
+test('Проверить лейаут категорий', async ({ categotiesPage }) => {
   await categotiesPage.assertContentPageLayoutScrenshot();
 });

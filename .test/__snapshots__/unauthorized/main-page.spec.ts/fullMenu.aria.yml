@@ -68,23 +68,18 @@
     - text: RUTUBE всегда с вами
     - list "RUTUBE всегда с вами":
       - listitem:
-        - link "Файл для установки на Android":
-          - /url: https://redirect.appmetrica.yandex.com/serve/29052416578047020?client_id=1754470058379629708&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+        - link "Файл для установки на Android" 
       - listitem:
         - link "Ярлык для iOS":
           - /url: https://rutube.ru/info/rutubeapp/
       - listitem:
-        - link "Установить из Huawei App Gallery":
-          - /url: https://redirect.appmetrica.yandex.com/serve/389285442492612095?client_id=1754470058379629708&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+        - link "Установить из Huawei App Gallery"
       - listitem:
-        - link "Установить из RuStore":
-          - /url: https://redirect.appmetrica.yandex.com/serve/533400622968373086?client_id=1754470058379629708&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+        - link "Установить из RuStore"  
       - listitem:
-        - link "Установить из RuMarket":
-          - /url: https://redirect.appmetrica.yandex.com/serve/389285425212041727?client_id=1754470058379629708&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+        - link "Установить из RuMarket"
       - listitem:
-        - link "Установить из Galaxy Store":
-          - /url: https://redirect.appmetrica.yandex.com/serve/605458194927465783?client_id=1754470058379629708&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+        - link "Установить из Galaxy Store"     
   - text: Больше от RUTUBE
   - list "Секция инструкции":
     - listitem:
