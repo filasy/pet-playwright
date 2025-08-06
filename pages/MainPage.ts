@@ -1,6 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { step } from '../utils/step';
+import { step } from '../utils/step_decorator';
+import path from 'path';
 
 export class MainPage extends BasePage {
   private readonly headerLocator: Locator;
@@ -15,9 +16,15 @@ export class MainPage extends BasePage {
   private readonly headerMenuButtonLocator: Locator;
   private readonly openMenuAriaLocator: Locator;
   private readonly changeThemeButtonLocator: Locator;
+
   constructor(page: Page) {
     super(page, '/');
     this.headerLocator = this.page.getByRole('banner');
+    this.menuLocator = this.page.getByLabel('Облегченная панель навигации');
+    this.headerAddButtonLocator = this.page.getByRole('button', { name: 'Добавить' });
+    this.headerNotoficationButtonLocator = this.page.getByRole('button', { name: 'Уведомления' });
+    this.headerLoginButtonLocator = this.page.getByRole('button', { name: 'Вход и регистрация' });
+    this.openMenuAriaLocator = this.page.locator('.menu-content-module__menuOpen');
     this.categoriesTabsLocator = this.page
       .getByRole('main')
       .locator('div')
@@ -25,10 +32,6 @@ export class MainPage extends BasePage {
         hasText: 'ГлавнаяРекомендацииФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ ',
       })
       .nth(1);
-    this.menuLocator = this.page.getByLabel('Облегченная панель навигации');
-    this.headerAddButtonLocator = this.page.getByRole('button', { name: 'Добавить' });
-    this.headerNotoficationButtonLocator = this.page.getByRole('button', { name: 'Уведомления' });
-    this.headerLoginButtonLocator = this.page.getByRole('button', { name: 'Вход и регистрация' });
     this.headerAddButtonPopupListLocator = this.page.locator(
       '.wdp-header-right-module__uploader ul',
     );
@@ -42,10 +45,42 @@ export class MainPage extends BasePage {
     this.headerMenuButtonLocator = this.page.getByRole('button', {
       name: 'Открыть меню навигации',
     });
-    this.openMenuAriaLocator = this.page.locator('.menu-content-module__menuOpen');
+
     this.changeThemeButtonLocator = this.page.getByRole('button', {
       name: 'Переключить на светлую тему',
     });
+  }
+
+  @step()
+  async login() {
+    const authFile = path.join(__dirname, '../.test/auth.json');
+    await this.headerLoginButtonLocator.click();
+    await this.page
+      .locator('iframe[title="Multipass"]')
+      .contentFrame()
+      .getByRole('textbox', { name: 'Введите телефон' })
+      .fill(process.env.LOGIN!);
+    await this.page
+      .locator('iframe[title="Multipass"]')
+      .contentFrame()
+      .getByRole('button', { name: 'Продолжить' })
+      .click();
+    await this.page
+      .locator('iframe[title="Multipass"]')
+      .contentFrame()
+      .locator('#login-password')
+      .fill(process.env.PASSWORD!);
+    await this.page
+      .locator('iframe[title="Multipass"]')
+      .contentFrame()
+      .getByRole('button', { name: 'Войти', exact: true })
+      .click();
+    await expect(
+      this.page.getByRole('img', { name: 'Иконка канала channel67627961' }),
+    ).toBeVisible();
+    await this.page.getByRole('img', { name: 'Иконка канала channel67627961' }).click();
+    await this.page.getByRole('link', { name: 'Профиль' }).click();
+    await this.page.context().storageState({ path: authFile });
   }
 
   @step()

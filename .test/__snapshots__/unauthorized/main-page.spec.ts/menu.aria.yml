@@ -32,9 +32,6 @@
     - listitem:
       - link "RUTUBE x PREMIER …":
         - /url: /feeds/premier/
-    - listitem:
-      - link "Сезон контента 2.0 …":
-        - /url: /feeds/content_seson_2/
   - separator
   - list:
     - listitem:

@@ -15,7 +15,7 @@ type MyFixture = {
 
 export const test = baseTest.extend<MyFixture>({
   app: [
-    async ({ page }, use) => {
+    async ({ page }, use) => {      
       await use(new App(page));
     },
     { title: 'POM' },
