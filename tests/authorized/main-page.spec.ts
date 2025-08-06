@@ -14,5 +14,5 @@ test('Проверить доступность элементов попапа 
 });
 test('Проверить доступность элементов развернутого меню', async ({ app }) => {
   await app.mainPage.openFullMenu();
-  await app.mainPage.assertFullMenuAriaSnapshot;
+  await app.mainPage.assertFullMenuAriaSnapshot();
 });

@@ -10,7 +10,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 1 : 0,
-  workers: isCI ? '80%' : undefined,
+  workers: isCI ? '80%' : '50%',
   testDir: './tests',
   outputDir: '.test/spec/output',
 
