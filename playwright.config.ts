@@ -13,7 +13,7 @@ export default defineConfig({
   workers: isCI ? '80%' : '50%',
   testDir: './tests',
   outputDir: '.test/spec/output',
-
+  snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
     isCI
       ? ['github']
