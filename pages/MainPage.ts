@@ -16,6 +16,8 @@ export class MainPage extends BasePage {
   private readonly headerMenuButtonLocator: Locator;
   private readonly openMenuAriaLocator: Locator;
   private readonly changeThemeButtonLocator: Locator;
+  private readonly userLogoLocator: Locator;
+  private readonly headerUserMenuLocator: Locator;
 
   constructor(page: Page) {
     super(page, '/');
@@ -25,6 +27,10 @@ export class MainPage extends BasePage {
     this.headerNotoficationButtonLocator = this.page.getByRole('button', { name: 'Уведомления' });
     this.headerLoginButtonLocator = this.page.getByRole('button', { name: 'Вход и регистрация' });
     this.openMenuAriaLocator = this.page.locator('.menu-content-module__menuOpen');
+    this.userLogoLocator = this.page.getByRole('img', { name: 'Иконка канала channel67627961' });
+    this.headerUserMenuLocator = this.page.getByText(
+      'channel67627961jf****@gmail.comПрофильМой каналСтудия RUTUBEВыйти',
+    );
     this.categoriesTabsLocator = this.page
       .getByRole('main')
       .locator('div')
@@ -51,6 +57,7 @@ export class MainPage extends BasePage {
     });
   }
 
+  //actions
   @step()
   async login() {
     const authFile = path.join(__dirname, '../.test/auth.json');
@@ -75,10 +82,8 @@ export class MainPage extends BasePage {
       .contentFrame()
       .getByRole('button', { name: 'Войти', exact: true })
       .click();
-    await expect(
-      this.page.getByRole('img', { name: 'Иконка канала channel67627961' }),
-    ).toBeVisible();
-    await this.page.getByRole('img', { name: 'Иконка канала channel67627961' }).click();
+    await expect(this.userLogoLocator).toBeVisible();
+    await this.openHeaderUserMenu();
     await this.page.getByRole('link', { name: 'Профиль' }).click();
     await this.page.context().storageState({ path: authFile });
   }
@@ -103,49 +108,43 @@ export class MainPage extends BasePage {
   async changeThemeToWhite() {
     this.changeThemeButtonLocator.click();
   }
+  @step()
+  async openHeaderUserMenu() {
+    this.userLogoLocator.click();
+  }
 
   //assetrions
   @step()
   async assertHeaderAriaSnapshot() {
-    await expect(this.headerLocator).toMatchAriaSnapshot({
-      name: 'header.aria.yml',
-    });
+    await this.checkAriaSnapshot(this.headerLocator, 'header.aria.yml');
   }
   @step()
   async assertCategoriesTabsAriaSnapshot() {
-    await expect(this.categoriesTabsLocator).toMatchAriaSnapshot({
-      name: 'categoriesTabs.aria.yml',
-    });
+    await this.checkAriaSnapshot(this.categoriesTabsLocator, 'categoriesTabs.aria.yml');
   }
   @step()
   async assertMenuAriaSnapshot() {
-    await expect(this.menuLocator).toMatchAriaSnapshot({
-      name: 'menu.aria.yml',
-    });
+    await this.checkAriaSnapshot(this.menuLocator, 'menu.aria.yml');
   }
   @step()
   async assertAddPopupListAriaSnapshot() {
-    await expect(this.headerAddButtonPopupListLocator).toMatchAriaSnapshot({
-      name: 'addButtonPopup.aria.yml',
-    });
+    await this.checkAriaSnapshot(this.headerAddButtonPopupListLocator, 'addButtonPopup.aria.yml');
   }
   @step()
   async assertNotificationPopupListAriaSnapshot() {
-    await expect(this.headerNotoficationPopupLocator).toMatchAriaSnapshot({
-      name: 'notoficationPopup.aria.yml',
-    });
+    await this.checkAriaSnapshot(this.headerNotoficationPopupLocator, 'notoficationPopup.aria.yml');
   }
   @step()
   async assertAuthorizationModalAriaSnapshot() {
-    await expect(this.authorizationModalLocator).toMatchAriaSnapshot({
-      name: 'authorizationModal.aria.yml',
-    });
+    await this.checkAriaSnapshot(this.authorizationModalLocator, 'authorizationModal.aria.yml');
   }
   @step()
   async assertFullMenuAriaSnapshot() {
-    await expect(this.openMenuAriaLocator).toMatchAriaSnapshot({
-      name: 'fullMenu.aria.yml',
-    });
+    await this.checkAriaSnapshot(this.openMenuAriaLocator, 'fullMenu.aria.yml');
+  }
+  @step()
+  async assertHeaderUserMenuAriaSnapshot() {
+    await this.checkAriaSnapshot(this.headerUserMenuLocator, 'headerUserMenuLocator.aria.yml');
   }
   @step()
   async assertTheme(attributeValue: 'dark2021' | 'white2022') {

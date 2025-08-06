@@ -1,4 +1,4 @@
-import { Page, test } from '@playwright/test';
+import { expect, Locator, Page, test } from '@playwright/test';
 import { step } from '../utils/step_decorator';
 
 export abstract class BasePage {
@@ -20,5 +20,10 @@ export abstract class BasePage {
       .locator('[class*=wdp-popup-module__popup]')
       .getByRole('button', { name: 'Закрыть' })
       .click();
+  }
+  protected async checkAriaSnapshot(locator: Locator, ariaName: string){
+        await expect(locator).toMatchAriaSnapshot({
+          name: ariaName,
+        });
   }
 }
