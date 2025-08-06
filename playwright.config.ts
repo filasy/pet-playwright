@@ -1,16 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const isCI = !!process.env.CI;
 
@@ -21,69 +13,42 @@ export default defineConfig({
   workers: isCI ? '80%' : undefined,
   testDir: './tests',
   outputDir: '.test/spec/output',
-  expect: {
-    toHaveScreenshot: {
-      pathTemplate: `.test/__screenshots__/{projectName}/{platform}/{testFileName}/{arg}{ext}`,
-    },
-    toMatchAriaSnapshot: {
-      pathTemplate: `.test/__snapshots__/{testFileName}/{arg}{ext}`,
-    },
-  },
+
   reporter: [
-    isCI ? ['github'] : ['html', { outputFolder: '.test/spec/html_report', open: 'on-failure' }],
+    isCI
+      ? ['github']
+      : ['html', { outputFolder: '.test/spec/html_report', open: 'always', noSnippets: true }],
   ],
   use: {
     baseURL: 'https://rutube.ru',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    ...devices['Desktop Chrome'],
   },
 
   projects: [
+    { name: 'auth', testMatch: 'tests/auth.spec.ts' },
     {
-      name: 'chromium',
+      name: 'authorized',
+      testDir: 'tests/authorized',
       use: {
-        ...devices['Desktop Chrome'],
-        // launchOptions: {
-        //  slowMo: 500,
-        // },
+        storageState: '.test/auth.json',
+      },
+      dependencies: ['auth'],
+      expect: {
+        toMatchAriaSnapshot: {
+          pathTemplate: `.test/__snapshots__/authorized/{testFileName}/{arg}{ext}`,
+        },
       },
     },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    {
+      name: 'unauthorized',
+      testDir: 'tests/unauthorized',
+      expect: {
+        toMatchAriaSnapshot: {
+          pathTemplate: `.test/__snapshots__/unauthorized/{testFileName}/{arg}{ext}`,
+        },
+      },
+    },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });

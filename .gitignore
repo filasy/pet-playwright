@@ -5,3 +5,4 @@ node_modules/
 .test/spec/
 /blob-report/
 /playwright/.cache/
+.env
