@@ -16,28 +16,28 @@ test.describe(
     },
   },
   () => {
-    test('Проверить доступность элементов бокового меню', async ({ app }) => {
+    test('Проверить доступность элементов бокового меню для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.assertMenuAriaSnapshot();
     });
-    test('Проверить доступность элементов хедера', async ({ app }) => {
+    test('Проверить доступность элементов хедера для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.assertHeaderAriaSnapshot();
     });
-    test('Проверить доступность элементов табов категорий', async ({ app }) => {
+    test('Проверить доступность элементов табов категорий для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.assertCategoriesTabsAriaSnapshot();
     });
-    test('Проверить доступность элементов списка добавления контента', async ({ app }) => {
+    test('Проверить доступность элементов списка добавления контента для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.openAddPopupList();
       await app.mainPage.assertAddPopupListAriaSnapshot();
     });
-    test('Проверить доступность элементов попапа уведомлений', async ({ app }) => {
+    test('Проверить доступность элементов попапа уведомлений для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.openNotificationdPopupList();
       await app.mainPage.assertNotificationPopupListAriaSnapshot();
     });
-    test('Проверить доступность элементов модального окна авторизации', async ({ app }) => {
+    test('Проверить доступность элементов модального окна авторизации для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.openAuthorisationModal();
       await app.mainPage.assertAuthorizationModalAriaSnapshot();
     });
-    test('Проверить доступность элементов развернутого меню', async ({ app }) => {
+    test('Проверить доступность элементов развернутого меню для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.openFullMenu();
       await app.mainPage.assertFullMenuAriaSnapshot();
     });
