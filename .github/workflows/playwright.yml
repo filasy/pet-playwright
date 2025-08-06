@@ -4,6 +4,9 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+env: 
+  LOGIN: ${{ secrets.LOGIN }}
+  PASSWORD: ${{ secrets.PASSWORD }}    
 jobs:
   test:
     timeout-minutes: 60
