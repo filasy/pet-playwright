@@ -18,7 +18,7 @@ export default defineConfig({
     isCI
       ? ['github']
       : ['html', { outputFolder: '.test/spec/html_report', open: 'always', noSnippets: true }],
-    ['./utils/slowStepReporter.ts'],
+    // ['./utils/slowStepReporter.ts'],
   ],
   use: {
     baseURL: 'https://rutube.ru',

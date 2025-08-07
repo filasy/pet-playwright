@@ -1,0 +1,23 @@
+- heading "Моё" [level=1]
+- list:
+  - listitem:
+    - link "Подписки":
+      - /url: /my/subscriptions/
+  - listitem:
+    - link "История просмотра":
+      - /url: /my/history/
+  - listitem:
+    - link "Плейлисты":
+      - /url: /my/playlists/
+  - listitem:
+    - link "Смотреть позже":
+      - /url: /my/future/
+  - listitem:
+    - link "Комментарии":
+      - /url: /my/comments/
+  - listitem:
+    - link "Понравилось":
+      - /url: /my/liked/
+    - text: Здесь собраны видео, которые вам понравились
+- img "bird_looking_for.svg"
+- text: Вы ещё не подписаны ни на один канал
