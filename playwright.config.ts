@@ -25,6 +25,13 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ...devices['Desktop Chrome'],
+    proxy: isCI
+      ? {
+          server: process.env.PROXY_IP!,
+          username: process.env.PROXY_LOGIN!,
+          password: process.env.PROXY_PASSWORD!,
+        }
+      : undefined,
   },
 
   projects: [
