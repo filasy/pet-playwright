@@ -17,7 +17,7 @@ export default defineConfig({
   reporter: [
     isCI
       ? ['github']
-      : ['html', { outputFolder: '.test/spec/html_report', open: 'always', noSnippets: true }],
+      : ['html', { outputFolder: '.test/spec/html_report', open: 'on-failure', noSnippets: true }],
     // ['./utils/slowStepReporter.ts'],
   ],
   use: {
