@@ -15,7 +15,14 @@ export default defineConfig({
   outputDir: '.test/output',
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
-    isCI ? ['github'] : ['html', { open: 'on-failure', noSnippets: true }],
+    isCI ? ['github'] : ['list'], // ['html', { open: 'on-failure', noSnippets: true }],
+    [
+      'monocart-reporter',
+      {
+        name: 'Rutube',
+        outputFile: '.test/output/monocart-report/index.html',
+      },
+    ],
     // ['./utils/slowStepReporter.ts'],
   ],
   use: {

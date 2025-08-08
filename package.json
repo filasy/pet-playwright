@@ -12,7 +12,8 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.54.1",
-    "@types/node": "^24.1.0"
+    "@types/node": "^24.1.0",
+    "monocart-reporter": "^2.9.21"
   },
   "dependencies": {
     "dotenv": "^17.2.1"
