@@ -6,32 +6,32 @@ export class ForCreatorsPage extends BasePage {
   private readonly pageContentLocator: Locator;
   static readonly testParams = [
     {
-      url: 'https://rutube.ru/for_creators/#main',
+      url: '/for_creators/#main',
       screnshotName: 'mainTab.png',
       testName: 'Главная',
     },
     {
-      url: 'https://rutube.ru/for_creators/#steps',
+      url: '/for_creators/#steps',
       screnshotName: 'stepsTab.png',
       testName: 'Первые шаги',
     },
     {
-      url: 'https://rutube.ru/for_creators/#faq',
+      url: '/for_creators/#faq',
       screnshotName: 'faqTab.png',
       testName: 'Как развивать канал',
     },
     {
-      url: 'https://rutube.ru/for_creators/#monetization',
+      url: '/for_creators/#monetization',
       screnshotName: 'monetizationTab.png',
       testName: 'Монетизация',
     },
     {
-      url: 'https://rutube.ru/for_creators/#rules',
+      url: '/for_creators/#rules',
       screnshotName: 'rulesTab.png',
       testName: 'Правила',
     },
     {
-      url: 'https://rutube.ru/for_creators/#team',
+      url: '/for_creators/#team',
       screnshotName: 'teamTab.png',
       testName: 'Команда R',
     },
