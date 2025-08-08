@@ -12,12 +12,10 @@ export default defineConfig({
   retries: isCI ? 1 : 0,
   workers: isCI ? '80%' : '50%',
   testDir: './tests',
-  outputDir: '.test/spec/output',
+  outputDir: '.test/output',
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
-    isCI
-      ? ['github']
-      : ['html', { outputFolder: '.test/spec/html_report', open: 'on-failure', noSnippets: true }],
+    isCI ? ['github'] : ['html', { open: 'on-failure', noSnippets: true }],
     // ['./utils/slowStepReporter.ts'],
   ],
   use: {
@@ -25,13 +23,13 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ...devices['Desktop Chrome'],
-    proxy: isCI
-      ? {
-          server: process.env.PROXY_IP!,
-          username: process.env.PROXY_LOGIN!,
-          password: process.env.PROXY_PASSWORD!,
-        }
-      : undefined,
+    // proxy: isCI
+    //   ? {
+    //       server: process.env.PROXY_IP!,
+    //       username: process.env.PROXY_LOGIN!,
+    //       password: process.env.PROXY_PASSWORD!,
+    //     }
+    //   : undefined,
   },
 
   projects: [
