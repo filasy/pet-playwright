@@ -5,17 +5,13 @@ import { SubscriptionsPage } from '../pages/SubscriptionsPage';
 import { ForCreatorsPage } from '../pages/ForCreatorsPage';
 
 export class App {
-  public readonly mainPage: MainPage;
-  public readonly categotiesPage: CategotiesPage;
-  public readonly forCreatorsPage: ForCreatorsPage;
-  public readonly subscriptionsPage: SubscriptionsPage;
-
-  constructor(private page: Page) {
-    this.mainPage = new MainPage(this.page);
-    this.categotiesPage = new CategotiesPage(this.page);
-    this.forCreatorsPage = new ForCreatorsPage(this.page);
-    this.subscriptionsPage = new SubscriptionsPage(this.page);
-  }
+  constructor(
+    private page: Page,
+    public mainPage = new MainPage(page),
+    public categotiesPage = new CategotiesPage(page),
+    public forCreatorsPage = new ForCreatorsPage(page),
+    public subscriptionsPage = new SubscriptionsPage(page),
+  ) {}
 }
 
 type MyFixture = {
