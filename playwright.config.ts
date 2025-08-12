@@ -16,14 +16,14 @@ export default defineConfig({
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
     isCI ? ['github'] : ['line'], // ['html', { open: 'on-failure', noSnippets: true }],
-    // [
-    //   'monocart-reporter',
-    //   {
-    //     name: 'Rutube',
-    //     outputFile: '.test/output/monocart-report/index.html',
-    //   },
-    // ],
-    // ['./utils/slowStepReporter.ts'],
+    [
+      'monocart-reporter',
+      {
+        name: 'Rutube',
+        outputFile: '.test/output/monocart-report/index.html',
+      },
+    ],
+    ['./utils/slowStepReporter.ts'],
   ],
   use: {
     baseURL: 'https://rutube.ru',
