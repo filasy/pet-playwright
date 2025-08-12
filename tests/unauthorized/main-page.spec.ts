@@ -24,7 +24,9 @@ test.describe(
     test('Проверить табы категорий для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.assertCategoriesTabsAriaSnapshot();
     });
-    test('Проверить список добавления контента для неавторизованного пользователя', async ({ app }) => {
+    test('Проверить список добавления контента для неавторизованного пользователя', async ({
+      app,
+    }) => {
       await app.mainPage.openAddPopupList();
       await app.mainPage.assertAddPopupListAriaSnapshot();
     });
@@ -32,7 +34,9 @@ test.describe(
       await app.mainPage.openNotificationdPopupList();
       await app.mainPage.assertNotificationPopupListAriaSnapshot();
     });
-    test('Проверить модальное окно авторизации для неавторизованного пользователя', async ({ app }) => {
+    test('Проверить модальное окно авторизации для неавторизованного пользователя', async ({
+      app,
+    }) => {
       await app.mainPage.openAuthorisationModal();
       await app.mainPage.assertAuthorizationModalAriaSnapshot();
     });

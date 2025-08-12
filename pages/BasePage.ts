@@ -2,7 +2,10 @@ import { expect, Locator, Page, test } from '@playwright/test';
 import { step } from '../utils/step_decorator';
 
 export abstract class BasePage {
-  protected constructor(protected readonly page: Page, protected readonly url: string) {}
+  protected constructor(
+    protected readonly page: Page,
+    protected readonly url: string,
+  ) {}
 
   public async visit() {
     await test.step(`Перейти на '${this.constructor.name}' по URL ${this.url}`, async () => {

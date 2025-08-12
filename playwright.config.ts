@@ -15,14 +15,14 @@ export default defineConfig({
   outputDir: '.test/output',
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
-    isCI ? ['github'] : ['list'], // ['html', { open: 'on-failure', noSnippets: true }],
-    [
-      'monocart-reporter',
-      {
-        name: 'Rutube',
-        outputFile: '.test/output/monocart-report/index.html',
-      },
-    ],
+    isCI ? ['github'] : ['line'], // ['html', { open: 'on-failure', noSnippets: true }],
+    // [
+    //   'monocart-reporter',
+    //   {
+    //     name: 'Rutube',
+    //     outputFile: '.test/output/monocart-report/index.html',
+    //   },
+    // ],
     // ['./utils/slowStepReporter.ts'],
   ],
   use: {
@@ -61,6 +61,17 @@ export default defineConfig({
         toMatchAriaSnapshot: {
           pathTemplate: `.test/__snapshots__/unauthorized/{testFileName}/{arg}{ext}`,
         },
+      },
+    },
+    {
+      name: 'API',
+      testDir: 'tests/API',
+      outputDir: '.test/output',
+      use: {
+        baseURL: 'https://restful-booker.herokuapp.com/',
+        trace: 'retain-on-failure',
+        screenshot: 'off',
+        video: 'off',
       },
     },
   ],

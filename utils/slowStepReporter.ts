@@ -1,9 +1,4 @@
-import type {
-  Reporter,
-  TestCase,
-  TestResult,
-  TestStep,
-} from "@playwright/test/reporter";
+import type { Reporter, TestCase, TestResult, TestStep } from '@playwright/test/reporter';
 
 class SlowStepReporter implements Reporter {
   private steps: Array<{
@@ -14,16 +9,14 @@ class SlowStepReporter implements Reporter {
   }> = [];
 
   onStepEnd(test: TestCase, result: TestResult, step: TestStep) {
-    if (step.category === "test.step") {
+    if (step.category === 'test.step') {
       const stepToReport = {
         count: 1,
-        name: step.titlePath().join("->"),
+        name: step.titlePath().join('->'),
         location: `${step.location?.file}:${step.location?.line}`,
         duration: step.duration,
       };
-      const alreadyReported = this.steps.find(
-        (s) => s.name === stepToReport.name,
-      );
+      const alreadyReported = this.steps.find((s) => s.name === stepToReport.name);
 
       if (alreadyReported) {
         alreadyReported.count++;
@@ -34,7 +27,7 @@ class SlowStepReporter implements Reporter {
   }
 
   onEnd() {
-    console.warn("TOP-10 slowest steps");
+    console.warn('TOP-10 slowest steps');
     console.table(
       // Slowest first
       this.steps
