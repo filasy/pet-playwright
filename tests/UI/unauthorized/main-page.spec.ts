@@ -1,4 +1,4 @@
-import { test } from '../../fixtures/App';
+import { test } from "../../../fixtures/App";
 
 test.beforeEach(async ({ app }) => {
   await app.mainPage.visit();
@@ -19,7 +19,7 @@ test.describe(
       await app.mainPage.assertMenuAriaSnapshot();
     });
     test('Проверить хедер для неавторизованного пользователя', async ({ app }) => {
-      await app.mainPage.assertHeaderAriaSnapshot();
+      await app.mainPage.header.assertHeaderAriaSnapshot();
     });
     test('Проверить табы категорий для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.assertCategoriesTabsAriaSnapshot();
@@ -27,21 +27,21 @@ test.describe(
     test('Проверить список добавления контента для неавторизованного пользователя', async ({
       app,
     }) => {
-      await app.mainPage.openAddPopupList();
+      await app.mainPage.header.openAddPopupList();
       await app.mainPage.assertAddPopupListAriaSnapshot();
     });
     test('Проверить попап уведомлений для неавторизованного пользователя', async ({ app }) => {
-      await app.mainPage.openNotificationdPopupList();
+      await app.mainPage.header.openNotificationdPopupList();
       await app.mainPage.assertNotificationPopupListAriaSnapshot();
     });
     test('Проверить модальное окно авторизации для неавторизованного пользователя', async ({
       app,
     }) => {
-      await app.mainPage.openAuthorisationModal();
+      await app.mainPage.header.openAuthorisationModal();
       await app.mainPage.assertAuthorizationModalAriaSnapshot();
     });
     test('Проверить развернутое меню для неавторизованного пользователя', async ({ app }) => {
-      await app.mainPage.openFullMenu();
+      await app.mainPage.header.openFullMenu();
       await app.mainPage.assertFullMenuAriaSnapshot();
     });
   },
@@ -49,6 +49,6 @@ test.describe(
 
 test('Проверить переключение темы', async ({ app }) => {
   await app.mainPage.assertTheme('dark2021');
-  await app.mainPage.changeThemeToWhite();
+  await app.mainPage.header.changeThemeToWhite();
   await app.mainPage.assertTheme('white2022');
 });

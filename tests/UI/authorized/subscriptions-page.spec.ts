@@ -1,4 +1,4 @@
-import { test } from '../../fixtures/App';
+import { test } from '../../../fixtures/App';
 
 test('Проверить доступность контента для авторизованного пользователя', async ({ app }) => {
   await app.subscriptionsPage.visit();

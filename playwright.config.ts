@@ -43,7 +43,7 @@ export default defineConfig({
     { name: 'auth', testMatch: 'tests/auth.spec.ts' },
     {
       name: 'authorized',
-      testDir: 'tests/authorized',
+      testDir: 'tests/UI/authorized',
       use: {
         storageState: '.test/auth.json',
       },
@@ -56,7 +56,7 @@ export default defineConfig({
     },
     {
       name: 'unauthorized',
-      testDir: 'tests/unauthorized',
+      testDir: 'tests/UI/unauthorized',
       expect: {
         toMatchAriaSnapshot: {
           pathTemplate: `.test/__snapshots__/unauthorized/{testFileName}/{arg}{ext}`,

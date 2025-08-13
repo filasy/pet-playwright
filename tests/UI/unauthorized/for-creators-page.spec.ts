@@ -1,5 +1,5 @@
 import test from '@playwright/test';
-import { ForCreatorsPage } from '../../pages/ForCreatorsPage';
+import { ForCreatorsPage } from '../../../pages/ForCreatorsPage';
 
 ForCreatorsPage.testParams.forEach(({ testName, url, screnshotName }) => {
   test(`Проверить лейаут таба - ${testName}`, async ({ page }) => {

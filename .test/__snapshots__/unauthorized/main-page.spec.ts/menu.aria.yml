@@ -9,9 +9,6 @@
       - link "Каталог …":
         - /url: /categories/
     - listitem:
-      - link "Популярное …":
-        - /url: /feeds/popular/
-    - listitem:
       - link "В топе …":
         - /url: /feeds/top/
     - listitem:
@@ -29,6 +26,9 @@
     - listitem:
       - link "Фильмы …":
         - /url: /feeds/movies/
+    - listitem:
+      - link "Спорт …":
+        - /url: /feeds/sport/
     - listitem:
       - link "RUTUBE x PREMIER …":
         - /url: /feeds/premier/
