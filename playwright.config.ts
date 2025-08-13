@@ -19,14 +19,13 @@ export default defineConfig({
     [
       'monocart-reporter',
       {
-        name: 'Rutube',
+        name: 'Yuliya Pirogova',
         outputFile: '.test/output/monocart-report/index.html',
       },
     ],
     ['./utils/slowStepReporter.ts'],
   ],
   use: {
-    baseURL: 'https://rutube.ru',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ...devices['Desktop Chrome'],
@@ -45,6 +44,7 @@ export default defineConfig({
       name: 'authorized',
       testDir: 'tests/UI/authorized',
       use: {
+        baseURL: 'https://rutube.ru',
         storageState: '.test/auth.json',
       },
       dependencies: ['auth'],
@@ -57,6 +57,9 @@ export default defineConfig({
     {
       name: 'unauthorized',
       testDir: 'tests/UI/unauthorized',
+      use: {
+        baseURL: 'https://rutube.ru',
+      },
       expect: {
         toMatchAriaSnapshot: {
           pathTemplate: `.test/__snapshots__/unauthorized/{testFileName}/{arg}{ext}`,
@@ -66,9 +69,8 @@ export default defineConfig({
     {
       name: 'API',
       testDir: 'tests/API',
-      outputDir: '.test/output',
       use: {
-        baseURL: 'https://restful-booker.herokuapp.com/',
+        baseURL: 'https://playground.learnqa.ru',
         trace: 'retain-on-failure',
         screenshot: 'off',
         video: 'off',
