@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:UI": "npx playwright test --project=authorized --project=unauthorized",
+    "test:API": "npx playwright test --project=API",
+    "test:report": "npx monocart show-report .test/output/monocart-report/index.html",    
     "codegen": "npx playwright codegen https://rutube.ru"
   },
   "keywords": [],
