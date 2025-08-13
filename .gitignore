@@ -7,4 +7,3 @@ node_modules/
 .env
 /.test/output/
 .test/auth.json
-utils/types
