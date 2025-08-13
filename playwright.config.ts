@@ -40,7 +40,7 @@ export default defineConfig({
   },
 
   projects: [
-    { name: 'auth', testMatch: 'tests/auth.spec.ts' },
+    { name: 'auth', testMatch: 'tests/UI/auth.spec.ts' },
     {
       name: 'authorized',
       testDir: 'tests/UI/authorized',
