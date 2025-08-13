@@ -5,7 +5,7 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 chromium.use(StealthPlugin());
 
 test('Authentication', async () => {
-  const authFile = path.join(__dirname, '../.test/auth.json');
+  const authFile = path.join(__dirname, '../../.test/auth.json');
   const browser = await chromium.launch();
   const context = await browser.newContext();
   const page = await context.newPage();
