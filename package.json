@@ -6,7 +6,7 @@
   "scripts": {
     "test:UI": "npx playwright test --project=authorized --project=unauthorized",
     "test:API": "npx playwright test --project=API",
-    "test:report": "npx monocart show-report .test/output/monocart-report/index.html",    
+    "test:report": "npx monocart show-report .test/output/monocart-report/index.html",
     "codegen": "npx playwright codegen https://rutube.ru"
   },
   "keywords": [],
@@ -14,14 +14,13 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
     "@playwright/test": "^1.54.2",
     "@types/node": "^24.1.0",
-    "monocart-reporter": "^2.9.21",
-    "prettier": "^3.6.2",
     "dotenv": "^17.2.1",
+    "monocart-reporter": "^2.9.21",
     "playwright-extra": "^4.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"    
-  },
-  "dependencies": {
+    "prettier": "^3.6.2",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
