@@ -1,5 +1,6 @@
 import test, { expect } from '@playwright/test';
 import { StatusCode } from './StatusCode';
+import Ajv, { JSONSchemaType } from 'ajv';
 
 type ResponseProps<T extends Record<string, unknown> | string> = {
   statusCode: number;
@@ -11,6 +12,8 @@ export class Response<T extends Record<string, unknown> | string> {
   public statusCode: StatusCode;
   public body: T;
   public headers: Record<string, string>;
+  private schema: JSONSchemaType<T> | undefined;
+  private ajv = new Ajv();
 
   constructor({ statusCode, headers, body }: ResponseProps<T>) {
     this.statusCode = new StatusCode(statusCode);
@@ -34,7 +37,29 @@ export class Response<T extends Record<string, unknown> | string> {
     withValue: any;
   }) {
     await test.step(`Checking that response have property '${String(property)}' with value ${withValue}`, async () => {
-      expect((this.body as T)[String(property)]).toEqual(withValue);
+      expect((this.body as Record<string, unknown>)[String(property)]).toEqual(
+        withValue,
+      );
     });
+  }
+  public async shouldHaveValidSchema() {
+    await test.step('Checking response body for valid schema', async () => {
+      if (!this.schema) {
+        throw new Error('Schema is not defined for this Response instance');
+      }
+      const validate = this.ajv.compile(this.schema);
+      validate(this.body);
+      if (validate.errors) {
+        await test.step(`Schema validation found errors:
+                    ${JSON.stringify(validate.errors, null, 2)}
+                `, () => {
+          expect(validate.errors?.length).toEqual(0);
+        });
+      }
+    });
+  }
+
+  public setSchema<T>(schema: JSONSchemaType<T>) {
+    this.schema = schema;
   }
 }

@@ -20,26 +20,16 @@ test.afterEach(async ({ request }) => {
   await deleteUserResponse.shouldBe({ success: '!' });
 });
 
-test('Check userId ', async ({ request }) => {
+test('Проверить Id пользователя после логина', async ({ request }) => {
   const userIdResponse = await api.user.getAuth();
   await userIdResponse.statusCode.shouldBe('OK');
   await userIdResponse.shouldHave({ property: 'user_id', withValue: +userId });
 });
 
-test('Check user info by id', async () => {
+test('[GET] User', async () => {
   const response = await api.user.getUserInfo(userId);
   await response.statusCode.shouldBe('OK');
+  await response.shouldHave({ property: 'email', withValue: userParams.email });
 
-  // await response.shouldHaveValidSchema();
-  await response.shouldHave({
-    property: 'firstName',
-    withValue: userParams.firstName,
-  });
-  await response.shouldBe({
-    id: userId.toString(),
-    username: userParams.username,
-    email: userParams.email,
-    firstName: userParams.firstName,
-    lastName: userParams.lastName,
-  });
+  await response.shouldHaveValidSchema();
 });

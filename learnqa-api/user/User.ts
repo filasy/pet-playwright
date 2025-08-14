@@ -3,7 +3,7 @@ import { ApiRoute } from '../BaseApiRoute';
 import { UserParams } from './UserParams';
 import { CreateUserResponse } from './CreateUserResponse';
 import { GetUserAuthResponse } from './GetUserAuthResponse';
-import { UserInfo } from './UserInfo';
+import { UserInfo, UserInfoSchema } from './UserInfo';
 
 export class User extends ApiRoute {
   public async delete(id: string | number) {
@@ -44,7 +44,7 @@ export class User extends ApiRoute {
         'GET',
         `${this.url}/${userId}`,
       );
-    //   response.setSchema(UserInfoSchema);
+      response.setSchema(UserInfoSchema);
       return response;
     });
   }
