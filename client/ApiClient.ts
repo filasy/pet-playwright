@@ -1,5 +1,5 @@
+import { HttpMetod } from './HTTPmetod';
 import { Response } from './Response';
-export type HttpMetod = 'GET' | 'POST' | 'PUT' | 'PUTCH' | 'DELETE';
 
 export type RequestOptions = {
   body?: Record<string, unknown>;

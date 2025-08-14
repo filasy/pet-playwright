@@ -1,6 +1,6 @@
 import { APIRequestContext } from '@playwright/test';
 import { PlaywrightApiClient } from '../client/PlaywrightApiClient';
-import { Hello } from './hello/Helo';
+import { Hello } from './hello/Hello';
 
 export class Api {
   private apiClient = new PlaywrightApiClient(this.request);

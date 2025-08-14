@@ -41,14 +41,14 @@ export class ForCreatorsPage extends BasePage {
     this.pageContentLocator = this.page.locator('#___gatsby');
   }
 
+  //actions
+  @step()
+  async open(url: string) {
+    await this.page.goto(url);
+  }
   //assertions
   @step()
   async assertPageLayoutScrenshot(screnshotName: string) {
     await this.checkLayoutByScreenshot(this.pageContentLocator, screnshotName);
-  }
-
-  @step()
-  async open(url: string) {
-    await this.page.goto(url);
   }
 }

@@ -25,6 +25,14 @@ export abstract class BasePage {
       .getByRole('button', { name: 'Закрыть' })
       .click();
   }
+  public async hideElement(selector: string) {
+    await this.page.evaluate((selector) => {
+      const element = document.querySelector(selector);
+      if (element) {
+        (element as HTMLElement).style.display = 'none';
+      }
+    }, selector);
+  }
 
   //assertions
   public async checkAriaSnapshot(locator: Locator, ariaName: string) {
@@ -34,13 +42,5 @@ export abstract class BasePage {
   }
   public async checkLayoutByScreenshot(locator: Locator, screnshotName: string) {
     await expect(locator).toHaveScreenshot(screnshotName, { maxDiffPixelRatio: 0.02 });
-  }
-  async hideElement(selector: string) {
-    await this.page.evaluate((selector) => {
-      const element = document.querySelector(selector);
-      if (element) {
-        (element as HTMLElement).style.display = 'none';
-      }
-    }, selector);
   }
 }

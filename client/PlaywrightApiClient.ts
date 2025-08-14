@@ -1,6 +1,7 @@
 import { APIRequestContext, test } from '@playwright/test';
-import { ApiClient, HttpMetod, RequestOptions } from './ApiClient';
+import { ApiClient, RequestOptions } from './ApiClient';
 import { Response } from './Response';
+import { HttpMetod } from './HTTPmetod';
 
 export class PlaywrightApiClient implements ApiClient {
   constructor(private request: APIRequestContext) {}

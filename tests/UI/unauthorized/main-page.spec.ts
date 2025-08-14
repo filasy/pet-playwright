@@ -1,4 +1,4 @@
-import { test } from "../../../fixtures/App";
+import { test } from '../../../fixtures/App';
 
 test.beforeEach(async ({ app }) => {
   await app.mainPage.visit();

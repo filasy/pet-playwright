@@ -9,13 +9,15 @@ export class CategotiesPage extends BasePage {
     this.contentPageLocator = this.page.locator('.grid-module__grid');
   }
 
+  //actions
+  @step()
+  async hideHeader() {
+    await this.hideElement('header');
+  }
+  
   //assertion
   @step()
   async assertContentPageLayoutScrenshot() {
     await this.checkLayoutByScreenshot(this.contentPageLocator, 'contentPageLayout.png');
-  }
-  @step()
-  async hideHeader() {
-    await this.hideElement('header');
   }
 }

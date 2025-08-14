@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { ApiRoute } from '../ApiRoute';
+import { ApiRoute } from '../BaseApiRoute';
 
 export class Hello extends ApiRoute {
   public get(params?: { name?: string }) {
