@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-import { Api } from '../../api/API';
 import { faker } from '@faker-js/faker';
+import { Api } from '../../api/API';
 
 test('[GET] Проверить Hello', async ({ request }) => {
   const myName = faker.person.firstName();
