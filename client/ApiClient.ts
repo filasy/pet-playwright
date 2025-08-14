@@ -12,4 +12,6 @@ export type ApiClient = {
     url: string,
     options?: RequestOptions,
   ): Promise<Response<T>>;
+
+  setExtraHeaders(headers: Record<string,string>): void;
 };

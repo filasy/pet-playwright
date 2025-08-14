@@ -4,7 +4,13 @@ import { Response } from './Response';
 import { HttpMetod } from './HttpMetod';
 
 export class PlaywrightApiClient implements ApiClient {
+  private extraHeaders: Record<string, string> | undefined;
+
   constructor(private request: APIRequestContext) {}
+  setExtraHeaders(headers: Record<string, string>): void {
+    this.extraHeaders = headers;
+  }
+
   public sendRequest<T extends Record<string, unknown> | string>(
     method: HttpMetod,
     url: string,
@@ -14,6 +20,7 @@ export class PlaywrightApiClient implements ApiClient {
       const response = await this.request[method.toLowerCase() as 'get'](url, {
         data: options?.body,
         params: options?.params,
+        headers: this.extraHeaders,
       });
 
       let responseBody: Record<string, unknown> | string;
