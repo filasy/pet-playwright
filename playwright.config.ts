@@ -15,7 +15,7 @@ export default defineConfig({
   outputDir: '.test/output',
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
-    isCI ? ['github'] : ['line'], // ['html', { open: 'on-failure', noSnippets: true }],
+    isCI ? ['github'] : ['list'], // ['html', { open: 'on-failure', noSnippets: true }],
     [
       'monocart-reporter',
       {

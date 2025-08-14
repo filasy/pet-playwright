@@ -66,17 +66,17 @@
     - text: RUTUBE всегда с вами
     - list "RUTUBE всегда с вами":
       - listitem:
-        - link "Файл для установки на Android":
+        - link "Файл для установки на Android"
       - listitem:
-        - link "Ярлык для iOS":
+        - link "Ярлык для iOS"
       - listitem:
-        - link "Установить из Huawei App Gallery":
+        - link "Установить из Huawei App Gallery"
       - listitem:
-        - link "Установить из RuStore":
+        - link "Установить из RuStore"
       - listitem:
-        - link "Установить из RuMarket":
+        - link "Установить из RuMarket"
       - listitem:
-        - link "Установить из Galaxy Store":
+        - link "Установить из Galaxy Store"
   - text: Больше от RUTUBE
   - list "Секция инструкции":
     - listitem:
