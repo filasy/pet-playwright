@@ -1,11 +1,15 @@
-import { HttpMetod } from './HTTPmetod';
+import { HttpMetod } from './HttpMetod';
 import { Response } from './Response';
 
 export type RequestOptions = {
-  body?: Record<string, unknown>;
+  body?: Record<string, unknown> | string;
   params?: Record<string, string>;
 };
 
 export type ApiClient = {
-  sendRequest(method: HttpMetod, url: string, options?: RequestOptions): Promise<Response>;
+  sendRequest<T extends Record<string, unknown> | string>(
+    method: HttpMetod,
+    url: string,
+    options?: RequestOptions,
+  ): Promise<Response<T>>;
 };

@@ -7,6 +7,7 @@ test('[GET] Проверить Hello c name', async ({ request }) => {
   const response = await new Api(request).hello.get({ name: myName });
   await response.statusCode.shouldBe('OK');
   await response.shouldBe({ answer: `Hello, ${myName}` });
+  await response.shouldHave({property: 'answer', withValue: `Hello, ${myName}`})
 });
 test('[GET] Проверить Hello без name', async ({ request }) => {
   const response = await new Api(request).hello.get();
