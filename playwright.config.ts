@@ -15,7 +15,7 @@ export default defineConfig({
   outputDir: '.test/output',
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
-    isCI ? ['github'] : ['list'], // ['html', { open: 'on-failure', noSnippets: true }],
+    ['list'],
     [
       'monocart-reporter',
       {
@@ -30,13 +30,13 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ...devices['Desktop Chrome'],
-    // proxy: isCI
-    //   ? {
-    //       server: process.env.PROXY_IP!,
-    //       username: process.env.PROXY_LOGIN!,
-    //       password: process.env.PROXY_PASSWORD!,
-    //     }
-    //   : undefined,
+    proxy: isCI
+      ? {
+          server: process.env.PROXY_IP!,
+          username: process.env.PROXY_LOGIN!,
+          password: process.env.PROXY_PASSWORD!,
+        }
+      : undefined,
   },
 
   projects: [
