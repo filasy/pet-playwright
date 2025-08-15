@@ -9,5 +9,11 @@ services:
       - .:/tests
       - node_modules:/tests/node_modules
     command: npx playwright test
+    environment:
+      - LOGIN=${LOGIN}
+      - PASSWORD=${PASSWORD}
+      - PROXY_IP=${PROXY_IP}
+      - PROXY_LOGIN=${PROXY_LOGIN}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
 volumes:
   node_modules:
