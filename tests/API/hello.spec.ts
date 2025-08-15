@@ -1,21 +1,26 @@
-import { test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { Api } from '../../learnqa-api/Api';
+import { test } from '../../fixtures/API';
 
-test('[GET] Проверить Hello c name', async ({ request }) => {
+test('[GET] Hello выводит переданный name', async ({ api }) => {
   const myName = faker.person.firstName();
-  const response = await new Api(request).hello.get({ name: myName });
+  const response = await api.hello.get({ name: myName });
+
   await response.statusCode.shouldBe('OK');
   await response.shouldBe({ answer: `Hello, ${myName}` });
-  await response.shouldHave({property: 'answer', withValue: `Hello, ${myName}`})
+  await response.shouldHave({
+    property: 'answer',
+    withValue: `Hello, ${myName}`,
+  });
 });
-test('[GET] Проверить Hello без name', async ({ request }) => {
-  const response = await new Api(request).hello.get();
+test('[GET] Hello без name', async ({ api }) => {
+  const response = await api.hello.get();
+
   await response.statusCode.shouldBe('OK');
   await response.shouldBe({ answer: `Hello, someone` });
 });
-test('[GET] Проверить Hello c пустым name', async ({ request }) => {
-  const response = await new Api(request).hello.get({ name: '' });
+test('[GET] Hello c пустым name', async ({ api }) => {
+  const response = await api.hello.get({ name: '' });
+
   await response.statusCode.shouldBe('OK');
   await response.shouldBe({ answer: `Hello, someone` });
 });

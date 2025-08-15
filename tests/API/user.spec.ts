@@ -1,35 +1,22 @@
-import test from '@playwright/test';
-import { Api } from '../../learnqa-api/Api';
-import { createRandomUserParams } from '../../utils/test-data';
+import { test } from '../../fixtures/API';
 
-const userParams = createRandomUserParams();
-let api: Api;
-let userId: string;
+test('Проверить Id пользователя после логина', async ({ authApi }) => {
+  const userIdResponse = await authApi.user.getAuth();
 
-test.beforeEach(async ({ request }) => {
-  api = new Api(request);
-  const createUserResponse = await api.user.create(userParams);
-  await createUserResponse.statusCode.shouldBe('OK');
-  userId = createUserResponse.body.id;
-  await api.authenticate(userParams.email, userParams.password);
-});
-
-test.afterEach(async ({ request }) => {
-  const deleteUserResponse = await api.user.delete(userId);
-  await deleteUserResponse.statusCode.shouldBe('OK');
-  await deleteUserResponse.shouldBe({ success: '!' });
-});
-
-test('Проверить Id пользователя после логина', async ({ request }) => {
-  const userIdResponse = await api.user.getAuth();
   await userIdResponse.statusCode.shouldBe('OK');
-  await userIdResponse.shouldHave({ property: 'user_id', withValue: +userId });
+  await userIdResponse.shouldHave({
+    property: 'user_id',
+    withValue: +authApi.authUser!.userId,
+  });
 });
 
-test('[GET] User', async () => {
-  const response = await api.user.getUserInfo(userId);
-  await response.statusCode.shouldBe('OK');
-  await response.shouldHave({ property: 'email', withValue: userParams.email });
+test('[GET] Проверить инфо о User по Id', async ({ authApi }) => {
+  const response = await authApi.user.getUserInfo(authApi.authUser!.userId);
 
+  await response.statusCode.shouldBe('OK');
+  await response.shouldHave({
+    property: 'email',
+    withValue: authApi.authUser!.email,
+  });
   await response.shouldHaveValidSchema();
 });

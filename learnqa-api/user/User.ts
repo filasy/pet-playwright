@@ -7,7 +7,7 @@ import { UserInfo, UserInfoSchema } from './UserInfo';
 
 export class User extends ApiRoute {
   public async delete(id: string | number) {
-    return test.step(`Sending delete user request with id ${id}`, async () => {
+    return test.step(`Sending delete user request with id: ${id}`, async () => {
       return this.apiClient.sendRequest<{ success: string }>(
         'DELETE',
         `${this.url}/${id}`,

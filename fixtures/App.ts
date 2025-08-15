@@ -7,10 +7,10 @@ import { ForCreatorsPage } from '../pages/ForCreatorsPage';
 export class App {
   constructor(
     private page: Page,
-    public mainPage = new MainPage(page),
-    public categotiesPage = new CategotiesPage(page),
-    public forCreatorsPage = new ForCreatorsPage(page),
-    public subscriptionsPage = new SubscriptionsPage(page),
+    public mainPage = new MainPage(this.page),
+    public categotiesPage = new CategotiesPage(this.page),
+    public forCreatorsPage = new ForCreatorsPage(this.page),
+    public subscriptionsPage = new SubscriptionsPage(this.page),
   ) {}
 }
 
