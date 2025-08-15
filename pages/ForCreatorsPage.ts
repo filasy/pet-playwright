@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { step } from '../utils/step_decorator';
+import { step } from '../utils/step-decorator';
 
 export class ForCreatorsPage extends BasePage {
   private readonly pageContentLocator: Locator;

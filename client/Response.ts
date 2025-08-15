@@ -36,7 +36,7 @@ export class Response<T extends Record<string, unknown> | string> {
     property: Key;
     withValue: any;
   }) {
-    await test.step(`Checking that response have property '${String(property)}' with value ${withValue}`, async () => {
+    await test.step(`Checking that response have property '${String(property)}' with value: ${withValue}`, async () => {
       expect((this.body as Record<string, unknown>)[String(property)]).toEqual(
         withValue,
       );

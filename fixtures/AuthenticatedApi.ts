@@ -3,8 +3,7 @@ import { Api } from '../learnqa-api/Api';
 import { UserParams } from '../learnqa-api/user/UserParams';
 import { createRandomUserParams } from '../utils/test-data';
 
-export class AuthotizedApi extends Api {
-  
+export class AuthenticatedApi extends Api {
   public authUser: (UserParams & { userId: string }) | undefined;
 
   public async authWithRandomUser() {

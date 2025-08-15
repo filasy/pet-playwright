@@ -10,3 +10,11 @@ export const createRandomUserParams = (): UserParams => {
     password: faker.internet.password(),
   };
 };
+
+// export class UserBuilder {
+//   private user;
+//   addUsername() {
+//     this.user.username = faker.internet.username();
+//     return this;
+//   }
+// }

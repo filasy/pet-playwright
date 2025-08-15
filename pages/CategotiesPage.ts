@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { step } from '../utils/step_decorator';
+import { step } from '../utils/step-decorator';
 
 export class CategotiesPage extends BasePage {
   private readonly contentPageLocator: Locator;
@@ -14,10 +14,13 @@ export class CategotiesPage extends BasePage {
   async hideHeader() {
     await this.hideElement('header');
   }
-  
+
   //assertion
   @step()
   async assertContentPageLayoutScrenshot() {
-    await this.checkLayoutByScreenshot(this.contentPageLocator, 'contentPageLayout.png');
+    await this.checkLayoutByScreenshot(
+      this.contentPageLocator,
+      'contentPageLayout.png',
+    );
   }
 }

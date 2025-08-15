@@ -23,7 +23,7 @@ export default defineConfig({
         outputFile: '.test/output/monocart-report/index.html',
       },
     ],
-    ['./utils/slowStepReporter.ts'],
+    // ['./utils/slowStepReporter.ts'],
   ],
   use: {
     baseURL: 'https://rutube.ru',

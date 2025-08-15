@@ -3,7 +3,7 @@ import { ApiRoute } from '../BaseApiRoute';
 import { UserParams } from './UserParams';
 import { CreateUserResponse } from './CreateUserResponse';
 import { GetUserAuthResponse } from './GetUserAuthResponse';
-import { UserInfo, UserInfoSchema } from './UserInfo';
+import { UserInfoResponse, UserInfoSchema } from './UserInfoResponse';
 
 export class User extends ApiRoute {
   public async delete(id: string | number) {
@@ -40,7 +40,7 @@ export class User extends ApiRoute {
   async getUserInfo(id: number | string) {
     const userId = typeof id === 'string' ? Number(id) : id;
     return test.step(`Fetching user info by id: ${id}`, async () => {
-      const response = await this.apiClient.sendRequest<UserInfo>(
+      const response = await this.apiClient.sendRequest<UserInfoResponse>(
         'GET',
         `${this.url}/${userId}`,
       );

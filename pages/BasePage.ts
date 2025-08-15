@@ -1,5 +1,5 @@
 import { expect, Locator, Page, test } from '@playwright/test';
-import { step } from '../utils/step_decorator';
+import { step } from '../utils/step-decorator';
 
 export abstract class BasePage {
   protected constructor(
@@ -16,7 +16,10 @@ export abstract class BasePage {
   //actions
   @step('Закрыть уведомление об использовании cookies')
   public async closeCoockeisAlert() {
-    await this.page.getByLabel('Уведомление об использовании cookies').locator('button').click();
+    await this.page
+      .getByLabel('Уведомление об использовании cookies')
+      .locator('button')
+      .click();
   }
   @step('Закрыть модалку с рекламой')
   public async closeAdvertisementModal() {
@@ -40,7 +43,12 @@ export abstract class BasePage {
       name: ariaName,
     });
   }
-  public async checkLayoutByScreenshot(locator: Locator, screnshotName: string) {
-    await expect(locator).toHaveScreenshot(screnshotName, { maxDiffPixelRatio: 0.02 });
+  public async checkLayoutByScreenshot(
+    locator: Locator,
+    screnshotName: string,
+  ) {
+    await expect(locator).toHaveScreenshot(screnshotName, {
+      maxDiffPixelRatio: 0.02,
+    });
   }
 }

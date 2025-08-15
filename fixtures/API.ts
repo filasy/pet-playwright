@@ -1,10 +1,10 @@
 import { test as base } from '@playwright/test';
 import { Api } from '../learnqa-api/Api';
-import { AuthotizedApi } from './AuthenticatedApi';
+import { AuthenticatedApi } from './AuthenticatedApi';
 
 type MyFixtures = {
   api: Api;
-  authApi: AuthotizedApi;
+  authApi: AuthenticatedApi;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -13,7 +13,7 @@ export const test = base.extend<MyFixtures>({
   },
 
   authApi: async ({ request }, use) => {
-    const api = new AuthotizedApi(request);
+    const api = new AuthenticatedApi(request);
     await api.authWithRandomUser();
     use(api);
     await api.user.delete(api.authUser!.userId);

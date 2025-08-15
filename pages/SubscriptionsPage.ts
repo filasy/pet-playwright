@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { step } from '../utils/step_decorator';
+import { step } from '../utils/step-decorator';
 
 export class SubscriptionsPage extends BasePage {
   private readonly contentPageLocator: Locator;
@@ -12,6 +12,9 @@ export class SubscriptionsPage extends BasePage {
   //assertions
   @step()
   async assertContentPageAriaSnapshot() {
-    await this.checkAriaSnapshot(this.contentPageLocator, 'contentPage.aria.yml');
+    await this.checkAriaSnapshot(
+      this.contentPageLocator,
+      'contentPage.aria.yml',
+    );
   }
 }

@@ -1,6 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { step } from '../utils/step_decorator';
+import { step } from '../utils/step-decorator';
 import { Header } from './components/HeaderComponent';
 
 export class MainPage extends BasePage {
@@ -17,12 +17,15 @@ export class MainPage extends BasePage {
     super(page, '/');
     this.header = new Header(this.page);
     this.menuLocator = this.page.getByLabel('Облегченная панель навигации');
-    this.fullMenuAriaLocator = this.page.locator('.menu-content-module__menuOpen');
+    this.fullMenuAriaLocator = this.page.locator(
+      '.menu-content-module__menuOpen',
+    );
     this.categoriesTabsLocator = this.page
       .getByRole('main')
       .locator('div')
       .filter({
-        hasText: 'ГлавнаяРекомендацииФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ ',
+        hasText:
+          'ГлавнаяРекомендацииФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ ',
       })
       .nth(1);
     this.authorizationModalLocator = this.page
@@ -32,14 +35,21 @@ export class MainPage extends BasePage {
     this.userMenuLocator = this.page.getByText(
       'channel67627961jf****@gmail.comПрофильМой каналСтудия RUTUBEВыйти',
     );
-    this.addPopupListLocator = this.page.locator('.wdp-header-right-module__uploader ul');
-    this.notoficationPopupLocator = this.page.locator('.wdp-notifications-popup-module__wrapper');
+    this.addPopupListLocator = this.page.locator(
+      '.wdp-header-right-module__uploader ul',
+    );
+    this.notoficationPopupLocator = this.page.locator(
+      '.wdp-notifications-popup-module__wrapper',
+    );
   }
 
   //assetrions
   @step()
   async assertCategoriesTabsAriaSnapshot() {
-    await this.checkAriaSnapshot(this.categoriesTabsLocator, 'categoriesTabs.aria.yml');
+    await this.checkAriaSnapshot(
+      this.categoriesTabsLocator,
+      'categoriesTabs.aria.yml',
+    );
   }
   @step()
   async assertMenuAriaSnapshot() {
@@ -47,7 +57,10 @@ export class MainPage extends BasePage {
   }
   @step()
   async assertAuthorizationModalAriaSnapshot() {
-    await this.checkAriaSnapshot(this.authorizationModalLocator, 'authorizationModal.aria.yml');
+    await this.checkAriaSnapshot(
+      this.authorizationModalLocator,
+      'authorizationModal.aria.yml',
+    );
   }
   @step()
   async assertFullMenuAriaSnapshot() {
@@ -55,18 +68,30 @@ export class MainPage extends BasePage {
   }
   @step()
   async assertTheme(attributeValue: 'dark2021' | 'white2022') {
-    await expect(this.page.locator('html')).toHaveAttribute('data-pen-theme', attributeValue);
+    await expect(this.page.locator('html')).toHaveAttribute(
+      'data-pen-theme',
+      attributeValue,
+    );
   }
   @step()
   async assertUserMenuAriaSnapshot() {
-    await this.checkAriaSnapshot(this.userMenuLocator, 'headerUserMenuLocator.aria.yml');
+    await this.checkAriaSnapshot(
+      this.userMenuLocator,
+      'headerUserMenuLocator.aria.yml',
+    );
   }
   @step()
   async assertNotificationPopupListAriaSnapshot() {
-    await this.checkAriaSnapshot(this.notoficationPopupLocator, 'notoficationPopup.aria.yml');
+    await this.checkAriaSnapshot(
+      this.notoficationPopupLocator,
+      'notoficationPopup.aria.yml',
+    );
   }
   @step()
   async assertAddPopupListAriaSnapshot() {
-    await this.checkAriaSnapshot(this.addPopupListLocator, 'addButtonPopup.aria.yml');
+    await this.checkAriaSnapshot(
+      this.addPopupListLocator,
+      'addButtonPopup.aria.yml',
+    );
   }
 }
