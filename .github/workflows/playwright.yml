@@ -4,28 +4,23 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+env:
+  LOGIN: ${{ secrets.LOGIN }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+  PROXY_IP: ${{ secrets.PROXY_IP }}
+  PROXY_LOGIN: ${{ secrets.PROXY_LOGIN }}
+  PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}    
 jobs:
-  playwright:
+  test:
     name: 'Playwright Tests'
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.54.0-noble
-      options: --user 1001
-    env:
-      LOGIN: ${{ secrets.LOGIN }}
-      PASSWORD: ${{ secrets.PASSWORD }}
-      PROXY_IP: ${{ secrets.PROXY_IP }}
-      PROXY_LOGIN: ${{ secrets.PROXY_LOGIN }}
-      PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
+    permissions:
+      contents: write    
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-      - name: Install dependencies
-        run: npm ci
-      - name: Run your tests
-        run: npx playwright test
+      - name: Run Playwright tests inside Docker container
+        run: npm run docker-compose
+      
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
