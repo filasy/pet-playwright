@@ -4,12 +4,12 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
-env:
-  LOGIN: ${{ secrets.LOGIN }}
-  PASSWORD: ${{ secrets.PASSWORD }}
-  PROXY_IP: ${{ secrets.PROXY_IP }}
-  PROXY_LOGIN: ${{ secrets.PROXY_LOGIN }}
-  PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}    
+# env:
+#   LOGIN: ${{ secrets.LOGIN }}
+#   PASSWORD: ${{ secrets.PASSWORD }}
+#   PROXY_IP: ${{ secrets.PROXY_IP }}
+#   PROXY_LOGIN: ${{ secrets.PROXY_LOGIN }}
+#   PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}    
 jobs:
   test:
     name: 'Playwright Tests'
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run Playwright tests inside Docker container
-        run: npm run docker-compose
+        run: docker compose up tests -e LOGIN=${{ secrets.LOGIN }} -e PASSWORD=${{ secrets.PASSWORD }} -e PROXY_IP=${{ secrets.PROXY_IP }} -e PROXY_LOGIN=${{ secrets.PROXY_LOGIN }} -e  PROXY_PASSWORD=${{ secrets.PROXY_PASSWORD }}  
       
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
