@@ -13,8 +13,8 @@ export class Api {
   constructor(request: APIRequestContext) {
     this.request = request;
     this.apiClient = new PlaywrightApiClient(this.request);
-    this.hello = new Hello(this.apiClient, '/api/hello');
-    this.user = new User(this.apiClient, '/api/user');
+    this.hello = new Hello(this.apiClient, 'hello');
+    this.user = new User(this.apiClient, 'user');
   }
   async authenticate(...params: Parameters<typeof this.user.login>) {
     await test.step(`Authenticating with creds: ${params[0]}, ${params[1]}`, async () => {

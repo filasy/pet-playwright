@@ -30,13 +30,13 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ...devices['Desktop Chrome'],
-    proxy: isCI
-      ? {
-          server: process.env.PROXY_IP!,
-          username: process.env.PROXY_LOGIN!,
-          password: process.env.PROXY_PASSWORD!,
-        }
-      : undefined,
+    // proxy: isCI
+    //   ? {
+    //       server: process.env.PROXY_IP!,
+    //       username: process.env.PROXY_LOGIN!,
+    //       password: process.env.PROXY_PASSWORD!,
+    //     }
+    //   : undefined,
   },
 
   projects: [
@@ -67,7 +67,7 @@ export default defineConfig({
       name: 'API',
       testDir: 'tests/API',
       use: {
-        baseURL: 'https://playground.learnqa.ru',
+        baseURL: 'https://playground.learnqa.ru/api/',
         trace: 'retain-on-failure',
         screenshot: 'off',
         video: 'off',
