@@ -1,5 +1,5 @@
 services:
-  api-tests:
+  tests:
     build:
       dockerfile: Dockerfile
       context: .
@@ -8,6 +8,7 @@ services:
     volumes:
       - .:/tests
       - node_modules:/tests/node_modules
-    command: npx playwright test
+      - .test:/.test
+    command: npx playwright test -u
 volumes:
   node_modules:
