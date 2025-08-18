@@ -8,7 +8,7 @@
     "test:API": "npx playwright test --project=API",
     "test:report": "npx monocart show-report .test/output/monocart-report/index.html",
     "codegen": "npx playwright codegen https://rutube.ru",
-    "docker-compose": "docker compose up tests"
+    "docker-compose": "docker compose up --exit-code-from tests"
   },
   "keywords": [],
   "author": "Yuliya Pirogova",
