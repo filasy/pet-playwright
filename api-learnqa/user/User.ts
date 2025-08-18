@@ -4,14 +4,17 @@ import { UserParams } from './UserParams';
 import { CreateUserResponse } from './CreateUserResponse';
 import { GetUserAuthResponse } from './GetUserAuthResponse';
 import { UserInfoResponse, UserInfoSchema } from './UserInfoResponse';
+import { SuccessResponse, ResponseSchema } from './SuccessResponse';
 
 export class User extends ApiRoute {
   public async delete(id: string | number) {
     return test.step(`Отправить запрос для удаления user с id: ${id}`, async () => {
-      return this.apiClient.sendRequest<{ success: string }>(
+      const response = await this.apiClient.sendRequest<SuccessResponse>(
         'DELETE',
         `${this.url}/${id}`,
       );
+      response.setSchema(ResponseSchema);
+      return response;
     });
   }
 
@@ -20,6 +23,20 @@ export class User extends ApiRoute {
       return this.apiClient.sendRequest<CreateUserResponse>('POST', this.url, {
         body: createUserParams,
       });
+    });
+  }
+
+  public async update(userId: string, updateUserParams: UserParams) {
+    return test.step(`Отправить запрос для обновления user`, async () => {
+      const response = await this.apiClient.sendRequest<SuccessResponse>(
+        'PUT',
+        `${this.url}/${userId}`,
+        {
+          body: updateUserParams,
+        },
+      );
+      response.setSchema(ResponseSchema);
+      return response;
     });
   }
 

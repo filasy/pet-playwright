@@ -1,6 +1,6 @@
 import test from '@playwright/test';
-import { Api } from '../api-learnqa/Api';
-import { UserParams } from '../api-learnqa/user/UserParams';
+import { Api } from './Api';
+import { UserParams } from './user/UserParams';
 import { UserBuilder } from '../utils/helpers';
 
 export class AuthenticatedApi extends Api {
