@@ -17,7 +17,7 @@ export class Api {
     this.user = new User(this.apiClient, 'user');
   }
   async authenticate(...params: Parameters<typeof this.user.login>) {
-    await test.step(`Authenticating with creds: ${params[0]}, ${params[1]}`, async () => {
+    await test.step(`Логин с учетными данными: ${params[0]}, ${params[1]}`, async () => {
       const response = await this.user.login(...params);
       await response.statusCode.shouldBe('OK');
 

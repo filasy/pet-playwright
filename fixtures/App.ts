@@ -1,9 +1,9 @@
 import { Page, test as baseTest } from '@playwright/test';
-import { MainPage } from '../pages/MainPage';
-import { CategotiesPage } from '../pages/CategotiesPage';
-import { SubscriptionsPage } from '../pages/SubscriptionsPage';
-import { ForCreatorsPage } from '../pages/ForCreatorsPage';
+import { MainPage, CategotiesPage, SubscriptionsPage, ForCreatorsPage} from '../pages/index';
 
+/*
+  Фасад для Page Object Model
+*/
 export class App {
   constructor(
     private page: Page,

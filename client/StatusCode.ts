@@ -8,7 +8,7 @@ const STATUS_CODES = {
 export class StatusCode {
   constructor(private code: number) {}
   public async shouldBe(expectedCode: number | keyof typeof STATUS_CODES) {
-    return test.step(`Checking that status code equals: ${expectedCode}`, async () => {
+    return test.step(`Проверка: StatusCode=${expectedCode}`, async () => {
       const calculatedCode =
         typeof expectedCode === 'number' ? expectedCode : STATUS_CODES[expectedCode];
       expect(calculatedCode).toEqual(this.code);

@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { fakerRU as faker } from '@faker-js/faker';
 import { UserParams } from '../learnqa-api/user/UserParams';
 
 export const createRandomUserParams = (): UserParams => {
@@ -11,10 +11,3 @@ export const createRandomUserParams = (): UserParams => {
   };
 };
 
-// export class UserBuilder {
-//   private user;
-//   addUsername() {
-//     this.user.username = faker.internet.username();
-//     return this;
-//   }
-// }

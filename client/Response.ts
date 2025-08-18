@@ -22,7 +22,7 @@ export class Response<T extends Record<string, unknown> | string> {
   }
 
   public async shouldBe(expectedBody: T) {
-    await test.step(`Checking that body equals: ${JSON.stringify(expectedBody, null, 2)}`, async () => {
+    await test.step(`Проверка: body=${JSON.stringify(expectedBody, null, 2)}`, async () => {
       if (typeof expectedBody === 'string') {
         throw new Error('This response body is a string, not json');
       }
@@ -36,21 +36,21 @@ export class Response<T extends Record<string, unknown> | string> {
     property: Key;
     withValue: any;
   }) {
-    await test.step(`Checking that response have property '${String(property)}' with value: ${withValue}`, async () => {
+    await test.step(`Проверка: респонс имеет свойство '${String(property)}'=${withValue}`, async () => {
       expect((this.body as Record<string, unknown>)[String(property)]).toEqual(
         withValue,
       );
     });
   }
   public async shouldHaveValidSchema() {
-    await test.step('Checking response body for valid schema', async () => {
+    await test.step('Проверка: схема ответа валидная', async () => {
       if (!this.schema) {
         throw new Error('Schema is not defined for this Response instance');
       }
       const validate = this.ajv.compile(this.schema);
       validate(this.body);
       if (validate.errors) {
-        await test.step(`Schema validation found errors:
+        await test.step(`Обнаружены ошибки валидации схемы:
                     ${JSON.stringify(validate.errors, null, 2)}
                 `, () => {
           expect(validate.errors?.length).toEqual(0);

@@ -47,7 +47,7 @@ test.describe(
   },
 );
 
-test('Проверить переключение темы', async ({ app }) => {
+test('Переключить тему с темной на светлую', async ({ app }) => {
   await app.mainPage.assertTheme('dark2021');
   await app.mainPage.header.changeThemeToWhite();
   await app.mainPage.assertTheme('white2022');
