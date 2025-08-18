@@ -1,14 +1,14 @@
 import test from '@playwright/test';
-import { Api } from '../learnqa-api/Api';
-import { UserParams } from '../learnqa-api/user/UserParams';
-import { createRandomUserParams } from '../utils/helpers';
+import { Api } from '../api-learnqa/Api';
+import { UserParams } from '../api-learnqa/user/UserParams';
+import { UserBuilder } from '../utils/helpers';
 
 export class AuthenticatedApi extends Api {
   public authUser: (UserParams & { userId: string }) | undefined;
 
   public async authWithRandomUser() {
     await test.step(`Логин случайным пользователем`, async () => {
-      const randomUser = createRandomUserParams();
+      const randomUser = new UserBuilder().withAll().build();
       const createUserResponse = await this.user.create(randomUser);
       await createUserResponse.statusCode.shouldBe('OK');
       const userId = createUserResponse.body.id;
