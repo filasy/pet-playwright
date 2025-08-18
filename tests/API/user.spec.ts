@@ -31,6 +31,7 @@ test.describe('Авторизованный пользователь', () => {
 
     const updateUser = await authApi.user.update(userId, new_values); //обновляем юзера
     await updateUser.statusCode.shouldBe('OK');
+    await updateUser.duration.shouldBeValid()    
     await updateUser.shouldBe({ success: '!' });
 
     const getUserInfo = await authApi.user.getUserInfo(userId); //запрашиваем данные о юзере

@@ -1,11 +1,13 @@
 import test, { expect } from '@playwright/test';
 import { StatusCode } from './StatusCode';
 import Ajv, { JSONSchemaType } from 'ajv';
+import { Duration } from './Duration';
 
 type ResponseProps<T extends Record<string, unknown> | string> = {
   statusCode: number;
   body: T;
   headers: Record<string, string>;
+  duration: Duration;
 };
 
 export class Response<T extends Record<string, unknown> | string> {
@@ -14,11 +16,13 @@ export class Response<T extends Record<string, unknown> | string> {
   public headers: Record<string, string>;
   private schema: JSONSchemaType<T> | undefined;
   private ajv = new Ajv();
+  public duration: Duration;
 
-  constructor({ statusCode, headers, body }: ResponseProps<T>) {
+  constructor({ statusCode, headers, body, duration }: ResponseProps<T>) {
     this.statusCode = new StatusCode(statusCode);
     this.body = body;
     this.headers = headers;
+    this.duration = duration;
   }
 
   public async shouldBe(expectedBody: T) {

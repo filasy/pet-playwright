@@ -2,6 +2,7 @@ import { APIRequestContext, request } from '@playwright/test';
 import { ApiClient, RequestOptions } from './ApiClient';
 import { Response } from './Response';
 import { HttpMetod } from './HttpMetod';
+import { Duration } from './Duration';
 
 export class PlaywrightApiClient implements ApiClient {
   private extraHeaders: Record<string, string> | undefined;
@@ -20,12 +21,13 @@ export class PlaywrightApiClient implements ApiClient {
     options?: RequestOptions,
   ): Promise<Response<T>> {
     const context = await this.apiContext();
+    const startTime = Date.now();
     const response = await context[method.toLowerCase() as 'get'](url, {
       data: options?.body,
       params: options?.params,
       headers: this.extraHeaders,
     });
-
+    const executionTime = new Duration(Date.now() - startTime);
     let responseBody: Record<string, unknown> | string;
     try {
       responseBody = await response.json();
@@ -36,6 +38,7 @@ export class PlaywrightApiClient implements ApiClient {
       statusCode: response.status(),
       body: responseBody as T,
       headers: response.headers(),
+      duration: executionTime
     });
   }
 
