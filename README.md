@@ -21,8 +21,8 @@
 
 ## Тестируемые приложения
 
-- UI: <https://rutube.ru>
-- API: <https://playground.learnqa.ru/api>
+- UI: [rutube.ru](https://rutube.ru)
+- API: [playground.learnqa.ru](playground.learnqa.ru/api/map)
   <a id="autotests"></a>
 
 ## 🚀 Запуск автотестов и отчетов
