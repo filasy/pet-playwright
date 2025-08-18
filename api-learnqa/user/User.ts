@@ -8,10 +8,12 @@ import { SuccessResponse, ResponseSchema } from './SuccessResponse';
 
 export class User extends ApiRoute {
   public async delete(id: string | number) {
+    const userId = typeof id === 'number' ? id.toString() : id;
     return test.step(`Отправить запрос для удаления user с id: ${id}`, async () => {
       const response = await this.apiClient.sendRequest<SuccessResponse>(
         'DELETE',
-        `${this.url}/${id}`,
+        `${this.url}`,
+        { params: { id: userId } },
       );
       response.setSchema(ResponseSchema);
       return response;
@@ -30,8 +32,9 @@ export class User extends ApiRoute {
     return test.step(`Отправить запрос для обновления user`, async () => {
       const response = await this.apiClient.sendRequest<SuccessResponse>(
         'PUT',
-        `${this.url}/${userId}`,
+        `${this.url}`,
         {
+          params: {id: userId},
           body: updateUserParams,
         },
       );
