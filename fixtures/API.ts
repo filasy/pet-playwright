@@ -8,12 +8,12 @@ type MyFixtures = {
 };
 
 export const test = base.extend<MyFixtures>({
-  api: async ({ request }, use) => {
-    await use(new Api(request));
+  api: async ({}, use) => {
+    await use(new Api());
   },
 
-  authApi: async ({ request }, use) => {
-    const api = new AuthenticatedApi(request);
+  authApi: async ({}, use) => {
+    const api = new AuthenticatedApi();
     await api.authWithRandomUser();
     await use(api);
     await api.user.delete(api.authUser!.userId);

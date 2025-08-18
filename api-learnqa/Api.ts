@@ -5,17 +5,10 @@ import { ApiClient } from '../api-client/ApiClient';
 import { User } from './user/User';
 
 export class Api {
-  private request: APIRequestContext;
-  private apiClient: ApiClient;
-  public hello: Hello;
-  public user: User;
+  private apiClient: ApiClient = new PlaywrightApiClient();;
+  public hello: Hello = new Hello(this.apiClient, 'hello');
+  public user: User = new User(this.apiClient, 'user');
 
-  constructor(request: APIRequestContext) {
-    this.request = request;
-    this.apiClient = new PlaywrightApiClient(this.request);
-    this.hello = new Hello(this.apiClient, 'hello');
-    this.user = new User(this.apiClient, 'user');
-  }
   async authenticate(...params: Parameters<typeof this.user.login>) {
     await test.step(`Логин с учетными данными: ${params[0]}, ${params[1]}`, async () => {
       const response = await this.user.login(...params);
