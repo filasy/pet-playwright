@@ -1,4 +1,4 @@
-import { ApiClient } from "../client/ApiClient";
+import { ApiClient } from '../api-client/ApiClient';
 
 export abstract class ApiRoute {
   constructor(

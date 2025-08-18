@@ -1,7 +1,7 @@
 import test, { APIRequestContext } from '@playwright/test';
-import { PlaywrightApiClient } from '../client/PlaywrightApiClient';
+import { PlaywrightApiClient } from '../api-client/PlaywrightApiClient';
 import { Hello } from './hello/Hello';
-import { ApiClient } from '../client/ApiClient';
+import { ApiClient } from '../api-client/ApiClient';
 import { User } from './user/User';
 
 export class Api {

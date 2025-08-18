@@ -1,5 +1,5 @@
 import { test as base } from '@playwright/test';
-import { Api } from '../learnqa-api/Api';
+import { Api } from '../api-learnqa/Api';
 import { AuthenticatedApi } from './AuthenticatedApi';
 
 type MyFixtures = {
