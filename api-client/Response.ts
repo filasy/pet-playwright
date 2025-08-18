@@ -31,14 +31,14 @@ export class Response<T extends Record<string, unknown> | string> {
   }
   public async shouldHave<Key extends keyof T>({
     property,
-    withValue,
+    value,
   }: {
     property: Key;
-    withValue: any;
+    value: any;
   }) {
-    await test.step(`Проверка: респонс имеет свойство '${String(property)}'=${withValue}`, async () => {
+    await test.step(`Проверка: cвойство '${String(property)}'=${value}`, async () => {
       expect((this.body as Record<string, unknown>)[String(property)]).toEqual(
-        withValue,
+        value,
       );
     });
   }

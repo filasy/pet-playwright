@@ -9,7 +9,7 @@ test('[GET] Hello выводит переданный name', async ({ api }) => 
   await response.shouldBe({ answer: `Hello, ${myName}` });
   await response.shouldHave({
     property: 'answer',
-    withValue: `Hello, ${myName}`,
+    value: `Hello, ${myName}`,
   });
 });
 test('[GET] Hello без name', async ({ api }) => {
