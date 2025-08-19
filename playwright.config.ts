@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
+import * as os from "node:os";
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -16,7 +17,15 @@ export default defineConfig({
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
     ['list'],
-    ['allure-playwright'],
+    ['allure-playwright',  {
+        environmentInfo: {
+          os_platform: os.platform(),
+          os_release: os.release(),
+          os_version: os.version(),
+          node_version: process.version,
+        },
+      }
+    ],
     [
       'monocart-reporter',
       {
@@ -24,7 +33,7 @@ export default defineConfig({
         outputFile: '.test/output/monocart-report/index.html',
       },
     ],
-    ['./utils/slowStepReporter.ts'],
+    // ['./utils/slowStepReporter.ts'],
   ],
   use: {
     baseURL: 'https://rutube.ru',
