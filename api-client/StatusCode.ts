@@ -14,7 +14,7 @@ export class StatusCode {
         typeof expectedCode === 'number'
           ? expectedCode
           : STATUS_CODES[expectedCode];
-      expect(calculatedCode).toEqual(this.code);
+      expect(calculatedCode, `Actual: ${calculatedCode}`).toEqual(this.code);
     });
   }
 }
