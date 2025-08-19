@@ -44,7 +44,7 @@ export class MainPage extends BasePage {
   //actions
   @step()
   async login(login: string, password: string) {
-    // await this.closeAdvertisementModal(); не всплывает на ci
+    await this.closeAdvertisementModal();
     await this.header.openAuthorisationModal();
     await this.authorisationModal.login(login,password);
     await this.header.userLogoButtonLocator.click();
