@@ -17,14 +17,14 @@ export default defineConfig({
   reporter: [
     ['list'],
     ['allure-playwright'],
-    // [
-    //   'monocart-reporter',
-    //   {
-    //     name: 'Yuliya Pirogova',
-    //     outputFile: '.test/output/monocart-report/index.html',
-    //   },
-    // ],
-    // ['./utils/slowStepReporter.ts'],
+    [
+      'monocart-reporter',
+      {
+        name: 'Yuliya Pirogova',
+        outputFile: '.test/output/monocart-report/index.html',
+      },
+    ],
+    ['./utils/slowStepReporter.ts'],
   ],
   use: {
     baseURL: 'https://rutube.ru',
