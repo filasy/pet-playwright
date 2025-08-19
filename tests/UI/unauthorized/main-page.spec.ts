@@ -38,7 +38,7 @@ test.describe(
       app,
     }) => {
       await app.mainPage.header.openAuthorisationModal();
-      await app.mainPage.assertAuthorizationModalAriaSnapshot();
+      await app.mainPage.authorisationModal.assertAuthorizationModalAriaSnapshot();
     });
     test('Проверить развернутое меню для неавторизованного пользователя', async ({ app }) => {
       await app.mainPage.header.openFullMenu();

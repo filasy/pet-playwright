@@ -6,7 +6,7 @@ import { AuthorisationModal } from './components/AuthorisationModal';
 
 export class MainPage extends BasePage {
   public readonly header: Header;
-  private readonly authorisationModal: AuthorisationModal;
+  public readonly authorisationModal: AuthorisationModal;
   private readonly categoriesTabsLocator: Locator;
   private readonly menuLocator: Locator;
   private readonly fullMenuAriaLocator: Locator;
