@@ -44,12 +44,12 @@ test.describe('Авторизованный пользователь', () => {
     { tag: '@negative' },
     async ({ authApi }) => {
       const response = await authApi.user.delete('100500');
-      response.statusCode.shouldBe('Bad Request');
-      response.shouldHave({
+      await  response.statusCode.shouldBe('Bad Request');
+      await response.shouldHave({
         property: 'error',
         value: 'This user can only delete their own account.',
       });
-      response.shouldHaveValidSchema();
+      await response.shouldHaveValidSchema();
     },
   );
 });
@@ -57,11 +57,11 @@ test.describe('Авторизованный пользователь', () => {
 test.describe('Неавторизованный пользователь', () => {
   test('Запрещено удаление аккаунта', { tag: '@negative' }, async ({ api }) => {
     const response = await api.user.delete('100500');
-    response.statusCode.shouldBe('Bad Request');
-    response.shouldHave({
+    await response.statusCode.shouldBe('Bad Request');
+    await response.shouldHave({
       property: 'error',
       value: 'Auth token not supplied',
     });
-    response.shouldHaveValidSchema();
+    await response.shouldHaveValidSchema();
   });
 });
