@@ -2,12 +2,13 @@ import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { step } from '../utils/step-decorator';
 import { Header } from './components/HeaderComponent';
+import { AuthorisationModal } from './components/AuthorisationModal';
 
 export class MainPage extends BasePage {
   public readonly header: Header;
+  private readonly authorisationModal: AuthorisationModal;
   private readonly categoriesTabsLocator: Locator;
   private readonly menuLocator: Locator;
-  private readonly authorizationModalLocator: Locator;
   private readonly fullMenuAriaLocator: Locator;
   private readonly userMenuLocator: Locator;
   private readonly addPopupListLocator: Locator;
@@ -16,6 +17,7 @@ export class MainPage extends BasePage {
   constructor(page: Page) {
     super(page, '/');
     this.header = new Header(this.page);
+    this.authorisationModal = new AuthorisationModal(this.page) 
     this.menuLocator = this.page.getByLabel('Облегченная панель навигации');
     this.fullMenuAriaLocator = this.page.locator(
       '.menu-content-module__menuOpen',
@@ -28,10 +30,7 @@ export class MainPage extends BasePage {
           'ГлавнаяРекомендацииФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ ',
       })
       .nth(1);
-    this.authorizationModalLocator = this.page
-      .locator('iframe[title="Multipass"]')
-      .contentFrame()
-      .locator('div[role=form]');
+
     this.userMenuLocator = this.page.getByText(
       'channel67627961jf****@gmail.comПрофильМой каналСтудия RUTUBEВыйти',
     );
@@ -41,6 +40,14 @@ export class MainPage extends BasePage {
     this.notoficationPopupLocator = this.page.locator(
       '.wdp-notifications-popup-module__wrapper',
     );
+  }
+  //actions
+  @step()
+  async login(login: string, password: string) {
+    // await this.closeAdvertisementModal(); не всплывает на ci
+    await this.header.openAuthorisationModal();
+    await this.authorisationModal.login(login,password);
+    await this.header.userLogoButtonLocator.click();
   }
 
   //assetrions
@@ -54,13 +61,6 @@ export class MainPage extends BasePage {
   @step()
   async assertMenuAriaSnapshot() {
     await this.checkAriaSnapshot(this.menuLocator, 'menu.aria.yml');
-  }
-  @step()
-  async assertAuthorizationModalAriaSnapshot() {
-    await this.checkAriaSnapshot(
-      this.authorizationModalLocator,
-      'authorizationModal.aria.yml',
-    );
   }
   @step()
   async assertFullMenuAriaSnapshot() {

@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import { step } from '../../utils/step-decorator';
 import { BaseComponent } from './BaseComponent';
+import { AuthorisationModal } from './AuthorisationModal';
 
 export class Header extends BaseComponent {
   readonly headerLocator: Locator;
@@ -8,7 +9,7 @@ export class Header extends BaseComponent {
   private readonly notoficationButtonLocator: Locator;
   private readonly loginButtonLocator: Locator;
   private readonly menuButtonLocator: Locator;
-  private readonly userLogoButtonLocator: Locator;
+  public readonly userLogoButtonLocator: Locator;
   private readonly changeThemeButtonLocator: Locator;
 
   constructor(page: Page) {
