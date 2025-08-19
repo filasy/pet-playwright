@@ -16,13 +16,14 @@ export default defineConfig({
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
     ['list'],
-    [
-      'monocart-reporter',
-      {
-        name: 'Yuliya Pirogova',
-        outputFile: '.test/output/monocart-report/index.html',
-      },
-    ],
+    ['allure-playwright'],
+    // [
+    //   'monocart-reporter',
+    //   {
+    //     name: 'Yuliya Pirogova',
+    //     outputFile: '.test/output/monocart-report/index.html',
+    //   },
+    // ],
     // ['./utils/slowStepReporter.ts'],
   ],
   use: {

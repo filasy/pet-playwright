@@ -6,8 +6,10 @@
   "scripts": {
     "test:UI": "npx playwright test --project=authorized --project=unauthorized",
     "test:API": "npx playwright test --project=API",
-    "test:report": "npx monocart show-report .test/output/monocart-report/index.html",
-    "docker-compose": "docker compose up --exit-code-from tests"
+    "monocart:open": "npx monocart show-report .test/output/monocart-report/index.html",
+    "docker-compose": "docker compose up --exit-code-from tests",
+    "alure:generate": "allure generate ./allure-results -o ./allure-report --clean",
+    "alure:open": "allure open ./allure-report"
   },
   "keywords": [],
   "author": "Yuliya Pirogova",
@@ -18,6 +20,7 @@
     "@playwright/test": "^1.54.2",
     "@types/node": "^24.1.0",
     "ajv": "^8.17.1",
+    "allure-playwright": "^3.3.3",
     "dotenv": "^17.2.1",
     "monocart-reporter": "^2.9.21",
     "playwright-extra": "^4.3.6",
