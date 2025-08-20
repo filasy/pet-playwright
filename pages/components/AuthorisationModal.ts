@@ -3,30 +3,27 @@ import { BaseComponent } from './BaseComponent';
 import { step } from '../../utils/step-decorator';
 
 export class AuthorisationModal extends BaseComponent {
-  private readonly loginInput = this.page
-      .locator('iframe[title="Multipass"]')
-      .contentFrame()
-      .getByRole('textbox', { name: 'Введите телефон' });
-  private readonly nextButton = this.page
-      .locator('iframe[title="Multipass"]')
-      .contentFrame()
-      .getByRole('button', { name: 'Продолжить' });
-  private readonly passwordInput = this.page
-      .locator('iframe[title="Multipass"]')
-      .contentFrame()
-      .locator('#login-password');
-  private readonly loginButton = this.page
-      .locator('iframe[title="Multipass"]')
-      .contentFrame()
-      .getByRole('button', { name: 'Войти', exact: true });
   private readonly authorizationModalLocator = this.page
-      .locator('iframe[title="Multipass"]')
-      .contentFrame()
-      .locator('div[role=form]');  
+    .locator('iframe[title="Multipass"]')
+    .contentFrame()
+    .locator('div[role=form]');
+  private readonly loginInput = this.authorizationModalLocator.locator(
+    '#phone-or-email-login',
+  );
+  private readonly nextButton = this.authorizationModalLocator.locator(
+    '#submit-login-continue',
+  );
+  private readonly passwordInput =
+    this.authorizationModalLocator.locator('#login-password');
+  private readonly loginButton =
+    this.authorizationModalLocator.locator('#submit-login');
+
   constructor(page: Page) {
     super(page);
   }
 
+  //actions
+  @step()
   async login(login: string, password: string) {
     await this.loginInput.fill(login);
     await this.nextButton.click();
@@ -35,11 +32,11 @@ export class AuthorisationModal extends BaseComponent {
   }
 
   //asserts
-   @step()
-   async assertAuthorizationModalAriaSnapshot() {
-     await this.checkAriaSnapshot(
-       this.authorizationModalLocator,
-       'authorizationModal.aria.yml',
-     );
-   } 
+  @step()
+  async assertAuthorizationModalAriaSnapshot() {
+    await this.checkAriaSnapshot(
+      this.authorizationModalLocator,
+      'authorizationModal.aria.yml',
+    );
+  }
 }
