@@ -1,12 +1,12 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { step } from '../utils/step-decorator';
 
 export class CategotiesPage extends BasePage {
-  private readonly contentPageLocator: Locator;
+  private readonly contentPageLocator = this.page.locator('.grid-module__grid');
+
   constructor(page: Page) {
     super(page, '/categories');
-    this.contentPageLocator = this.page.locator('.grid-module__grid');
   }
 
   //actions

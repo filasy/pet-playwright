@@ -1,52 +1,45 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { step } from '../utils/step-decorator';
 import { Header } from './components/HeaderComponent';
 import { AuthorisationModal } from './components/AuthorisationModal';
 
 export class MainPage extends BasePage {
-  public readonly header: Header;
-  public readonly authorisationModal: AuthorisationModal;
-  private readonly categoriesTabsLocator: Locator;
-  private readonly menuLocator: Locator;
-  private readonly fullMenuAriaLocator: Locator;
-  private readonly userMenuLocator: Locator;
-  private readonly addPopupListLocator: Locator;
-  private readonly notoficationPopupLocator: Locator;
+  public readonly header = new Header(this.page);
+  public readonly authorisationModal = new AuthorisationModal(this.page);
+  private readonly categoriesTabsLocator = this.page
+    .getByRole('main')
+    .locator('div')
+    .filter({
+      hasText:
+        'ГлавнаяРекомендацииФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ ',
+    })
+    .nth(1);
+  private readonly menuLocator = this.page.getByLabel(
+    'Облегченная панель навигации',
+  );
+  private readonly fullMenuAriaLocator = this.page.locator(
+    '.menu-content-module__menuOpen',
+  );
+  private readonly userMenuLocator = this.page.getByText(
+    'channel67627961jf****@gmail.comПрофильМой каналСтудия RUTUBEВыйти',
+  );
+  private readonly addPopupListLocator = this.page.locator(
+    '.wdp-header-right-module__uploader ul',
+  );
+  private readonly notoficationPopupLocator = this.page.locator(
+    '.wdp-notifications-popup-module__wrapper',
+  );
 
   constructor(page: Page) {
     super(page, '/');
-    this.header = new Header(this.page);
-    this.authorisationModal = new AuthorisationModal(this.page) 
-    this.menuLocator = this.page.getByLabel('Облегченная панель навигации');
-    this.fullMenuAriaLocator = this.page.locator(
-      '.menu-content-module__menuOpen',
-    );
-    this.categoriesTabsLocator = this.page
-      .getByRole('main')
-      .locator('div')
-      .filter({
-        hasText:
-          'ГлавнаяРекомендацииФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ ',
-      })
-      .nth(1);
-
-    this.userMenuLocator = this.page.getByText(
-      'channel67627961jf****@gmail.comПрофильМой каналСтудия RUTUBEВыйти',
-    );
-    this.addPopupListLocator = this.page.locator(
-      '.wdp-header-right-module__uploader ul',
-    );
-    this.notoficationPopupLocator = this.page.locator(
-      '.wdp-notifications-popup-module__wrapper',
-    );
   }
   //actions
   @step()
   async login(login: string, password: string) {
     await this.closeAdvertisementModal();
     await this.header.openAuthorisationModal();
-    await this.authorisationModal.login(login,password);
+    await this.authorisationModal.login(login, password);
     await this.header.userLogoButtonLocator.click();
   }
 

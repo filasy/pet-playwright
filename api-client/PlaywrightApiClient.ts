@@ -1,8 +1,5 @@
 import { APIRequestContext, request } from '@playwright/test';
-import { ApiClient, RequestOptions } from './ApiClient';
-import { Response } from './Response';
-import { HttpMetod } from './HttpMetod';
-import { Duration } from './Duration';
+import { ApiClient, RequestOptions, Response, HttpMetod, Duration } from './index';
 
 export class PlaywrightApiClient implements ApiClient {
   private extraHeaders: Record<string, string> | undefined;

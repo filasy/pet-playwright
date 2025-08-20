@@ -1,36 +1,30 @@
-import { Locator, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { BaseComponent } from './BaseComponent';
-import { th } from '@faker-js/faker/.';
 import { step } from '../../utils/step-decorator';
 
 export class AuthorisationModal extends BaseComponent {
-  private readonly loginInput: Locator;
-  private readonly nextButton: Locator;
-  private readonly passwordInput: Locator;
-  private readonly loginButton: Locator;
-  private readonly authorizationModalLocator: Locator;  
-  constructor(page: Page) {
-    super(page);
-    this.loginInput = this.page
+  private readonly loginInput = this.page
       .locator('iframe[title="Multipass"]')
       .contentFrame()
       .getByRole('textbox', { name: 'Введите телефон' });
-    this.nextButton = this.page
+  private readonly nextButton = this.page
       .locator('iframe[title="Multipass"]')
       .contentFrame()
       .getByRole('button', { name: 'Продолжить' });
-    this.passwordInput = this.page
+  private readonly passwordInput = this.page
       .locator('iframe[title="Multipass"]')
       .contentFrame()
       .locator('#login-password');
-    this.loginButton = this.page
+  private readonly loginButton = this.page
       .locator('iframe[title="Multipass"]')
       .contentFrame()
       .getByRole('button', { name: 'Войти', exact: true });
-        this.authorizationModalLocator = this.page
+  private readonly authorizationModalLocator = this.page
       .locator('iframe[title="Multipass"]')
       .contentFrame()
       .locator('div[role=form]');  
+  constructor(page: Page) {
+    super(page);
   }
 
   async login(login: string, password: string) {

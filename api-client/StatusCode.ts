@@ -1,4 +1,4 @@
-import test, { expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 const STATUS_CODES = {
   'OK': 200,
