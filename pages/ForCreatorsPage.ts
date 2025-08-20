@@ -3,7 +3,7 @@ import { BasePage } from './BasePage';
 import { step } from '../utils/step-decorator';
 
 export class ForCreatorsPage extends BasePage {
-  private readonly pageContentLocator: Locator;
+  private readonly pageContentLocator = this.page.locator('#___gatsby');
   static readonly testParams = [
     {
       url: '/for_creators/#main',
@@ -38,7 +38,6 @@ export class ForCreatorsPage extends BasePage {
   ];
   constructor(page: Page) {
     super(page, '/for_creators');
-    this.pageContentLocator = this.page.locator('#___gatsby');
   }
 
   //actions

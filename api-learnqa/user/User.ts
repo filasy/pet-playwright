@@ -1,10 +1,6 @@
 import { test } from '@playwright/test';
 import { ApiRoute } from '../BaseApiRoute';
-import { UserParams } from './UserParams';
-import { CreateUserResponse } from './CreateUserResponse';
-import { GetUserAuthResponse } from './GetUserAuthResponse';
-import { UserInfoResponse, UserInfoSchema } from './UserInfoResponse';
-import { SuccessResponse, ResponseSchema } from './SuccessResponse';
+import { UserParams, CreateUserResponse, GetUserAuthResponse, UserInfoResponse, UserInfoSchema, SuccessResponse, ResponseSchema} from './index';
 
 export class User extends ApiRoute {
   public async delete(id: string | number) {

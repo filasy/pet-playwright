@@ -1,5 +1,4 @@
-import { HttpMetod } from './HttpMetod';
-import { Response } from './Response';
+import { HttpMetod, Response } from './index';
 
 export type RequestOptions = {
   body?: Record<string, unknown> | string;
@@ -13,5 +12,5 @@ export type ApiClient = {
     options?: RequestOptions,
   ): Promise<Response<T>>;
 
-  setExtraHeaders(headers: Record<string,string>): void;
+  setExtraHeaders(headers: Record<string, string>): void;
 };

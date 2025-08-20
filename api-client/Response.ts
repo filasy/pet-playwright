@@ -1,7 +1,6 @@
-import test, { expect } from '@playwright/test';
-import { StatusCode } from './StatusCode';
-import Ajv, { JSONSchemaType } from 'ajv';
-import { Duration } from './Duration';
+import { test, expect } from '@playwright/test';
+import { StatusCode, Duration } from './index';
+import { Ajv, JSONSchemaType } from 'ajv';
 
 type ResponseProps<T extends Record<string, unknown> | string> = {
   statusCode: number;

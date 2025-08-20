@@ -4,33 +4,28 @@ import { BaseComponent } from './BaseComponent';
 import { AuthorisationModal } from './AuthorisationModal';
 
 export class Header extends BaseComponent {
-  readonly headerLocator: Locator;
-  private readonly addButtonLocator: Locator;
-  private readonly notoficationButtonLocator: Locator;
-  private readonly loginButtonLocator: Locator;
-  private readonly menuButtonLocator: Locator;
-  public readonly userLogoButtonLocator: Locator;
-  private readonly changeThemeButtonLocator: Locator;
+  readonly headerLocator = this.page.getByRole('banner');
+  private readonly addButtonLocator = this.page.getByRole('button', {
+    name: 'Добавить',
+  });
+  private readonly notoficationButtonLocator = this.page.getByRole('button', {
+    name: 'Уведомления',
+  });
+  private readonly loginButtonLocator = this.page.getByRole('button', {
+    name: 'Вход и регистрация',
+  });
+  private readonly menuButtonLocator = this.page.getByRole('button', {
+    name: 'Открыть меню навигации',
+  });
+  public readonly userLogoButtonLocator = this.page.getByRole('img', {
+    name: 'Иконка канала channel67627961',
+  });
+  private readonly changeThemeButtonLocator = this.page.getByRole('button', {
+    name: 'Переключить на светлую тему',
+  });
 
   constructor(page: Page) {
     super(page);
-    this.headerLocator = this.page.getByRole('banner');
-    this.addButtonLocator = this.page.getByRole('button', { name: 'Добавить' });
-    this.notoficationButtonLocator = this.page.getByRole('button', {
-      name: 'Уведомления',
-    });
-    this.loginButtonLocator = this.page.getByRole('button', {
-      name: 'Вход и регистрация',
-    });
-    this.menuButtonLocator = this.page.getByRole('button', {
-      name: 'Открыть меню навигации',
-    });
-    this.userLogoButtonLocator = this.page.getByRole('img', {
-      name: 'Иконка канала channel67627961',
-    });
-    this.changeThemeButtonLocator = this.page.getByRole('button', {
-      name: 'Переключить на светлую тему',
-    });
   }
 
   //actions
