@@ -10,7 +10,7 @@ export class Header extends BaseComponent {
   private readonly notoficationButtonLocator = this.page.getByRole('button', {
     name: 'Уведомления',
   });
-  private readonly loginButtonLocator = this.page.getByRole('button', {
+  public readonly loginButtonLocator = this.page.getByRole('button', {
     name: 'Вход и регистрация',
   });
   private readonly menuButtonLocator = this.page.getByRole('button', {

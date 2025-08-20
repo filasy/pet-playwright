@@ -87,4 +87,12 @@ export class MainPage extends BasePage {
       'addButtonPopup.aria.yml',
     );
   }
+  @step()
+  public async assertLoginButtonFontSize() {
+    await this.checkToHaveCSS(
+      this.header.loginButtonLocator,
+      'font-size',
+      '14px',
+    );
+  }
 }

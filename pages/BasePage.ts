@@ -38,17 +38,20 @@ export abstract class BasePage {
   }
 
   //assertions
-  public async checkAriaSnapshot(locator: Locator, ariaName: string) {
+  protected async checkAriaSnapshot(locator: Locator, ariaName: string) {
     await expect(locator).toMatchAriaSnapshot({
       name: ariaName,
     });
   }
-  public async checkLayoutByScreenshot(
+  protected async checkLayoutByScreenshot(
     locator: Locator,
     screnshotName: string,
   ) {
     await expect(locator).toHaveScreenshot(screnshotName, {
       maxDiffPixelRatio: 0.02,
     });
+  }
+  protected async checkToHaveCSS(locator: Locator, name: string, value: string){
+    await expect(locator).toHaveCSS(name, value);
   }
 }

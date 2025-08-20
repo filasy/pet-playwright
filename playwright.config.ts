@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
-import * as os from "node:os";
+import * as os from 'node:os';
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -12,19 +12,20 @@ export default defineConfig({
   forbidOnly: isCI,
   retries: isCI ? 1 : 0,
   workers: isCI ? '80%' : '50%',
-  testDir: './tests',
   outputDir: '.test/output',
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
     ['list'],
-    ['allure-playwright',  {
+    [
+      'allure-playwright',
+      {
         environmentInfo: {
           os_platform: os.platform(),
           os_release: os.release(),
           os_version: os.version(),
           node_version: process.version,
         },
-      }
+      },
     ],
     [
       'monocart-reporter',

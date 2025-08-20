@@ -3,20 +3,20 @@ import { BaseComponent } from './BaseComponent';
 import { step } from '../../utils/step-decorator';
 
 export class AuthorisationModal extends BaseComponent {
-  private readonly authorizationModalLocator = this.page
+  private readonly modalLocator = this.page
     .locator('iframe[title="Multipass"]')
     .contentFrame()
     .locator('div[role=form]');
-  private readonly loginInput = this.authorizationModalLocator.locator(
+  private readonly loginInput = this.modalLocator.locator(
     '#phone-or-email-login',
   );
-  private readonly nextButton = this.authorizationModalLocator.locator(
+  private readonly nextButton = this.modalLocator.locator(
     '#submit-login-continue',
   );
   private readonly passwordInput =
-    this.authorizationModalLocator.locator('#login-password');
+    this.modalLocator.locator('#login-password');
   private readonly loginButton =
-    this.authorizationModalLocator.locator('#submit-login');
+    this.modalLocator.locator('#submit-login');
 
   constructor(page: Page) {
     super(page);
@@ -35,7 +35,7 @@ export class AuthorisationModal extends BaseComponent {
   @step()
   async assertAuthorizationModalAriaSnapshot() {
     await this.checkAriaSnapshot(
-      this.authorizationModalLocator,
+      this.modalLocator,
       'authorizationModal.aria.yml',
     );
   }

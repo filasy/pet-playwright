@@ -15,13 +15,19 @@ test.describe(
     },
   },
   () => {
-    test('Проверить боковое меню для неавторизованного пользователя', async ({ app }) => {
+    test('Проверить боковое меню для неавторизованного пользователя', async ({
+      app,
+    }) => {
       await app.mainPage.assertMenuAriaSnapshot();
     });
-    test('Проверить хедер для неавторизованного пользователя', async ({ app }) => {
+    test('Проверить хедер для неавторизованного пользователя', async ({
+      app,
+    }) => {
       await app.mainPage.header.assertHeaderAriaSnapshot();
     });
-    test('Проверить табы категорий для неавторизованного пользователя', async ({ app }) => {
+    test('Проверить табы категорий для неавторизованного пользователя', async ({
+      app,
+    }) => {
       await app.mainPage.assertCategoriesTabsAriaSnapshot();
     });
     test('Проверить список добавления контента для неавторизованного пользователя', async ({
@@ -30,7 +36,9 @@ test.describe(
       await app.mainPage.header.openAddPopupList();
       await app.mainPage.assertAddPopupListAriaSnapshot();
     });
-    test('Проверить попап уведомлений для неавторизованного пользователя', async ({ app }) => {
+    test('Проверить попап уведомлений для неавторизованного пользователя', async ({
+      app,
+    }) => {
       await app.mainPage.header.openNotificationdPopupList();
       await app.mainPage.assertNotificationPopupListAriaSnapshot();
     });
@@ -40,7 +48,9 @@ test.describe(
       await app.mainPage.header.openAuthorisationModal();
       await app.mainPage.authorisationModal.assertAuthorizationModalAriaSnapshot();
     });
-    test('Проверить развернутое меню для неавторизованного пользователя', async ({ app }) => {
+    test('Проверить развернутое меню для неавторизованного пользователя', async ({
+      app,
+    }) => {
       await app.mainPage.header.openFullMenu();
       await app.mainPage.assertFullMenuAriaSnapshot();
     });
@@ -51,4 +61,8 @@ test('Переключить тему с темной на светлую', asyn
   await app.mainPage.assertTheme('dark2021');
   await app.mainPage.header.changeThemeToWhite();
   await app.mainPage.assertTheme('white2022');
+});
+
+test('Проверить font-size кнопки "Вход и регистрация"', async ({ app }) => {
+  await app.mainPage.assertLoginButtonFontSize();
 });
