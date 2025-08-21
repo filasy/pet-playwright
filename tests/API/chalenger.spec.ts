@@ -8,7 +8,7 @@ test.beforeAll(`Получить и установить токен`, async () =
   await api.authenticate();
 });
 
-test.describe.serial(() => {
+test.describe(() => {
   test('Получить список challenger', { tag: '@challenges' }, async () => {
     const response = await api.challenges.get();
     await response.statusCode.shouldBe('OK');
@@ -16,7 +16,7 @@ test.describe.serial(() => {
   });
 
   test('Получить список todo', { tag: '@challenges' }, async () => {
-    const response = await api.todo.get();
+    const response = await api.todo.getTodo();
     await response.statusCode.shouldBe('OK');
     await response.shouldHaveValidSchema();
   });
@@ -26,17 +26,18 @@ test.describe.serial(() => {
     { tag: ['@challenges', '@negative'] },
     async () => {
       allure.tag('UI');
-      const response = await api.todo.getWrong();
+      const response = await api.todo.getTodoWrong();
       await response.statusCode.shouldBe('Not Found');
     },
   );
 
   test('Получить todo по id', { tag: '@challenges' }, async () => {
-    const response = await api.todo.get(1);
+    const ID = 1;
+    const response = await api.todo.getTodo(ID);
     await response.statusCode.shouldBe('OK');
     await response.shouldHaveValidSchema();
     expect(response.body.todos!.length).toBe(1);
-    expect(response.body.todos![0].id).toBe(1);
+    expect(response.body.todos![0].id).toBe(ID);
   });
 
   test(
@@ -44,7 +45,7 @@ test.describe.serial(() => {
     { tag: ['@challenges', '@negative'] },
     async () => {
       const WRONG_ID = 100500;
-      const response = await api.todo.get(WRONG_ID);
+      const response = await api.todo.getTodo(WRONG_ID);
       await response.statusCode.shouldBe('Not Found');
       await response.shouldHaveValidSchema();
       await response.shouldBe({

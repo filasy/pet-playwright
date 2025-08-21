@@ -15,7 +15,7 @@ export default defineConfig({
   outputDir: '.test/output',
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
-    ['line'],
+    ['list'],
     [
       'allure-playwright',
       {
@@ -87,7 +87,7 @@ export default defineConfig({
     {
       name: 'challenges-API',
       grep: new RegExp('@challenges'),
-      workers: 1,
+      fullyParallel: false,
       use: {
         baseURL: 'https://apichallenges.herokuapp.com/',
         trace: 'retain-on-failure',
