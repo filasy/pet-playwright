@@ -2,7 +2,7 @@ import { ClientRequest } from 'http';
 import { test } from '../../fixtures/API';
 import { UserBuilder } from '../../utils/helpers';
 
-test.describe('Авторизованный пользователь', () => {
+test.describe('Авторизованный пользователь', { tag: '@learnqa' }, () => {
   test('Получить userId после логина', async ({ authApi }) => {
     const userIdResponse = await authApi.user.getAuth();
 
@@ -31,7 +31,7 @@ test.describe('Авторизованный пользователь', () => {
 
     const updateUser = await authApi.user.update(userId, new_values); //обновляем юзера
     await updateUser.statusCode.shouldBe('OK');
-    await updateUser.duration.shouldBeValid()    
+    await updateUser.duration.shouldBeValid();
     await updateUser.shouldBe({ success: '!' });
 
     const getUserInfo = await authApi.user.getUserInfo(userId); //запрашиваем данные о юзере
@@ -44,7 +44,7 @@ test.describe('Авторизованный пользователь', () => {
     { tag: '@negative' },
     async ({ authApi }) => {
       const response = await authApi.user.delete('100500');
-      await  response.statusCode.shouldBe('Bad Request');
+      await response.statusCode.shouldBe('Bad Request');
       await response.shouldHave({
         property: 'error',
         value: 'This user can only delete their own account.',
@@ -54,7 +54,7 @@ test.describe('Авторизованный пользователь', () => {
   );
 });
 
-test.describe('Неавторизованный пользователь', () => {
+test.describe('Неавторизованный пользователь', { tag: '@learnqa' }, () => {
   test('Запрещено удаление аккаунта', { tag: '@negative' }, async ({ api }) => {
     const response = await api.user.delete('100500');
     await response.statusCode.shouldBe('Bad Request');

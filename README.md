@@ -23,6 +23,7 @@
 
 - UI: [rutube.ru](https://rutube.ru)
 - API: [playground.learnqa.ru](http://playground.learnqa.ru/api/map)
+- API: [apichallenges.herokuapp.com](https://apichallenges.herokuapp.com/)
   <a id="autotests"></a>
 
 ## 🚀 Запуск автотестов и отчетов

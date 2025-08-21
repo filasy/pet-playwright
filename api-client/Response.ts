@@ -53,9 +53,7 @@ export class Response<T extends Record<string, unknown> | string> {
       const validate = this.ajv.compile(this.schema);
       validate(this.body);
       if (validate.errors) {
-        await test.step(`Обнаружены ошибки валидации схемы:
-                    ${JSON.stringify(validate.errors, null, 2)}
-                `, () => {
+        await test.step(`Обнаружены ошибки валидации схемы: ${JSON.stringify(validate.errors, null, 2)}`, () => {
           expect(validate.errors?.length).toEqual(0);
         });
       }

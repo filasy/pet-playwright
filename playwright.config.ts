@@ -15,7 +15,7 @@ export default defineConfig({
   outputDir: '.test/output',
   snapshotPathTemplate: `.test/__screenshots__/{testFileName}/{arg}{ext}`,
   reporter: [
-    ['list'],
+    ['line'],
     [
       'allure-playwright',
       {
@@ -75,10 +75,21 @@ export default defineConfig({
       },
     },
     {
-      name: 'API',
-      testDir: 'tests/API',
+      name: 'learn-qa-API',
+      grep: new RegExp('@learnqa'),
       use: {
         baseURL: 'https://playground.learnqa.ru/api/',
+        trace: 'retain-on-failure',
+        screenshot: 'off',
+        video: 'off',
+      },
+    },
+    {
+      name: 'challenges-API',
+      grep: new RegExp('@challenges'),
+      workers: 1,
+      use: {
+        baseURL: 'https://apichallenges.herokuapp.com/',
         trace: 'retain-on-failure',
         screenshot: 'off',
         video: 'off',

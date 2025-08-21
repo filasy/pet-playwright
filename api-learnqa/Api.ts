@@ -1,11 +1,11 @@
-import test, { APIRequestContext } from '@playwright/test';
+import test from '@playwright/test';
 import { PlaywrightApiClient } from '../api-client/PlaywrightApiClient';
 import { Hello } from './hello/Hello';
 import { ApiClient } from '../api-client/ApiClient';
 import { User } from './user/User';
 
 export class Api {
-  private apiClient: ApiClient = new PlaywrightApiClient();;
+  private apiClient: ApiClient = new PlaywrightApiClient();
   public hello: Hello = new Hello(this.apiClient, 'hello');
   public user: User = new User(this.apiClient, 'user');
 

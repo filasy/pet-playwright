@@ -2,8 +2,10 @@ import { test, expect } from '@playwright/test';
 
 const STATUS_CODES = {
   'OK': 200,
-  'Internal Server Error': 500,
+  'Created': 201,
   'Bad Request': 400,
+  'Not Found': 404,
+  'Internal Server Error': 500,
 } as const;
 
 export class StatusCode {
@@ -14,7 +16,7 @@ export class StatusCode {
         typeof expectedCode === 'number'
           ? expectedCode
           : STATUS_CODES[expectedCode];
-      expect(calculatedCode, `Actual: ${calculatedCode}`).toEqual(this.code);
+      expect(this.code, `Actual: ${this.code}`).toEqual(calculatedCode);
     });
   }
 }
