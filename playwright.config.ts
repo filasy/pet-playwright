@@ -53,7 +53,7 @@ export default defineConfig({
   projects: [
     { name: 'auth', testMatch: 'tests/UI/auth.spec.ts' },
     {
-      name: 'authorized',
+      name: 'rutube-auth-UI',
       testDir: 'tests/UI/authorized',
       use: {
         storageState: '.test/auth.json',
@@ -66,7 +66,7 @@ export default defineConfig({
       },
     },
     {
-      name: 'unauthorized',
+      name: 'rutube-unauth-UI',
       testDir: 'tests/UI/unauthorized',
       expect: {
         toMatchAriaSnapshot: {
@@ -75,7 +75,7 @@ export default defineConfig({
       },
     },
     {
-      name: 'learn-qa-API',
+      name: 'learnqa-API',
       grep: new RegExp('@learnqa'),
       use: {
         baseURL: 'https://playground.learnqa.ru/api/',

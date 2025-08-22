@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:UI": "npx playwright test --project=authorized --project=unauthorized",
-    "test:API": "npx playwright test --project=learn-qa-API --project=challenges-API",
+    "test:UI": "npx playwright test --project=rutube-auth-UI --project=rutube-unauth-UI",
+    "test:API": "npx playwright test --project=learnqa-API --project=challenges-API",
     "monocart:open": "npx monocart show-report .test/output/monocart-report/index.html",
     "docker-compose": "docker compose up --exit-code-from tests",
     "alure:generate": "allure generate ./allure-results -o ./allure-report --clean",
