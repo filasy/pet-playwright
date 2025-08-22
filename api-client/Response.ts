@@ -14,7 +14,7 @@ export class Response<T extends Record<string, unknown> | string> {
   public body: T;
   public headers: Record<string, string>;
   private schema: JSONSchemaType<T> | undefined;
-  private ajv = new Ajv();
+  private ajv = new Ajv({ allErrors: true });
   public duration: Duration;
 
   constructor({ statusCode, headers, body, duration }: ResponseProps<T>) {
@@ -24,9 +24,10 @@ export class Response<T extends Record<string, unknown> | string> {
     this.duration = duration;
   }
 
-  public async shouldBe(expectedBody: T) {
+  public async shouldBe(expectedBody: T | string) {
     await test.step(`Проверка: body=${JSON.stringify(expectedBody, null, 2)}`, async () => {
       if (typeof expectedBody === 'string') {
+        expect(this.body).toEqual(expectedBody);
         throw new Error('This response body is a string, not json');
       }
       expect(this.body).toEqual(expect.objectContaining(expectedBody));
@@ -57,6 +58,11 @@ export class Response<T extends Record<string, unknown> | string> {
           expect(validate.errors?.length).toEqual(0);
         });
       }
+    });
+  }
+  public async shouldBeEmpty() {
+    await test.step(`Проверка: body is empty`, async () => {
+      expect(this.body).toBeFalsy();
     });
   }
 

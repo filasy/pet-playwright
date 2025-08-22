@@ -16,16 +16,15 @@ test.describe(() => {
   });
 
   test('Получить список todo', { tag: '@challenges' }, async () => {
-    const response = await api.todo.getTodo();
+    const response = await api.todo.getTodoList();
     await response.statusCode.shouldBe('OK');
     await response.shouldHaveValidSchema();
   });
 
   test(
-    'Получить список todo. Ошибка в endpoint',
+    'Получить список todo. Ошибка в end point',
     { tag: ['@challenges', '@negative'] },
     async () => {
-      allure.tag('UI');
       const response = await api.todo.getTodoWrong();
       await response.statusCode.shouldBe('Not Found');
     },
@@ -33,7 +32,7 @@ test.describe(() => {
 
   test('Получить todo по id', { tag: '@challenges' }, async () => {
     const ID = 1;
-    const response = await api.todo.getTodo(ID);
+    const response = await api.todo.getTodoById(ID);
     await response.statusCode.shouldBe('OK');
     await response.shouldHaveValidSchema();
     expect(response.body.todos!.length).toBe(1);
@@ -45,7 +44,7 @@ test.describe(() => {
     { tag: ['@challenges', '@negative'] },
     async () => {
       const WRONG_ID = 100500;
-      const response = await api.todo.getTodo(WRONG_ID);
+      const response = await api.todo.getTodoById(WRONG_ID);
       await response.statusCode.shouldBe('Not Found');
       await response.shouldHaveValidSchema();
       await response.shouldBe({
@@ -53,10 +52,32 @@ test.describe(() => {
       });
     },
   );
+
+  [true, false].forEach((element) => {
+    test(
+      `Получить список ${element ? 'выполненных' : 'не выполненных'} заданий`,
+      { tag: ['@challenges'] },
+      async () => {
+        const response = await api.todo.filterTodo(element ? 'true' : 'false');
+        await response.statusCode.shouldBe('OK');
+        await response.shouldHaveValidSchema();
+        expect(
+          response.body.todos?.every((todo) => todo.doneStatus === element),
+          'Проверка: все todo c верным статусом',
+        ).toBeTruthy();
+      },
+    );
+  });
+
+  test('Получить заголовки ответа', { tag: '@challenges' }, async () => {
+    const response = await api.todo.headTodo();
+    await response.statusCode.shouldBe('OK');
+    await response.shouldBeEmpty();
+  });
 });
 
 test.afterAll(`Проверить количество выполненных заданий`, async () => {
-  const TEST_COUNT = 7;
+  const TEST_COUNT = 8;
   const response = await api.challenges.get();
   await response.statusCode.shouldBe('OK');
   expect(
