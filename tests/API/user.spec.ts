@@ -1,6 +1,5 @@
-import { ClientRequest } from 'http';
 import { test } from '../../fixtures/API';
-import { UserBuilder } from '../../utils/helpers';
+import { UserBuilder } from '../../utils/builders/user.builder';
 
 test.describe('Авторизованный пользователь', { tag: '@learnqa' }, () => {
   test('Получить userId после логина', async ({ authApi }) => {
@@ -25,7 +24,7 @@ test.describe('Авторизованный пользователь', { tag: '@
   });
 
   test('Обновить данные своего аккаунта', async ({ authApi }) => {
-    const new_values = new UserBuilder().withAll().build();
+    const new_values = UserBuilder.create().withAll().build();
     const { password, ...user_without_pass } = new_values;
     const userId = authApi.authUser!.userId;
 
