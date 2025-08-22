@@ -43,5 +43,5 @@ npm run test:API
 Для просмотра отчета monocart:
 
 ```
-npm run test:report
+npm run monocart:open
 ```
