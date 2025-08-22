@@ -1,18 +1,21 @@
 import { JSONSchemaType } from 'ajv';
 
 export type Todo = {
-  id: number;
   title: string;
   description: string;
   doneStatus: boolean;
 };
 
+export type TodoWithId = Todo & {
+  id: number;
+};
+
 export type TodosResponse = {
-  todos?: Todo[];
+  todos?: TodoWithId[];
   errorMessages?: string[];
 };
 
-export const TodoSchema: JSONSchemaType<Todo> = {
+export const TodoSchema: JSONSchemaType<TodoWithId> = {
   type: 'object',
   properties: {
     id: { type: 'number' },
@@ -30,12 +33,12 @@ export const TodosResponseSchema: JSONSchemaType<TodosResponse> = {
     todos: {
       type: 'array',
       items: TodoSchema,
-      nullable: true
+      nullable: true,
     },
     errorMessages: {
       type: 'array',
       items: { type: 'string' },
-      nullable : true
+      nullable: true,
     },
   },
   additionalProperties: false,

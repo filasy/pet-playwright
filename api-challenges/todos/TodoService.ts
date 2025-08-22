@@ -1,8 +1,8 @@
 import test from '@playwright/test';
 import { ApiRoute } from '../../api-learnqa/BaseApiRoute';
-import { TodosResponse, TodosResponseSchema } from './TodoResponse';
+import { Todo, TodoSchema, TodosResponse, TodosResponseSchema, TodoWithId } from './TodoResponse';
 
-export class Todo extends ApiRoute {
+export class TodoService extends ApiRoute {
   public async getTodoById(id: number) {
     return test.step(`Получить todo по id: = ${id}`, async () => {
       const response = await this.apiClient.sendRequest<TodosResponse>(
@@ -33,6 +33,16 @@ export class Todo extends ApiRoute {
         { params: { doneStatus } },
       );
       response.setSchema(TodosResponseSchema);
+      return response;
+    });
+  }
+
+  public async createTodo(todoParams: Todo) {
+    return test.step(`Создать todo`, async () => {
+      const response = await this.apiClient.sendRequest<TodoWithId>('POST', this.url, {
+        body: todoParams,
+      });
+      response.setSchema(TodoSchema);
       return response;
     });
   }

@@ -5,9 +5,15 @@ import * as api from './index';
 
 export class Api {
   private apiClient: ApiClient = new PlaywrightApiClient();
-  public challenger: api.Challenger = new api.Challenger(this.apiClient, 'challenger');
-  public challenges: api.Challenges = new api.Challenges(this.apiClient, 'challenges');
-  public todo: api.Todo = new api.Todo(this.apiClient, 'todos');
+  public challenger: api.Challenger = new api.Challenger(
+    this.apiClient,
+    'challenger',
+  );
+  public challenges: api.Challenges = new api.Challenges(
+    this.apiClient,
+    'challenges',
+  );
+  public todo: api.TodoService = new api.TodoService(this.apiClient, 'todos');
 
   async authenticate() {
     const response = await this.challenger.login();

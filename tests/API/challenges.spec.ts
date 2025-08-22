@@ -1,6 +1,7 @@
 import { Api } from '../../api-challenges/API';
 import { expect, test } from '../../fixtures/API';
 import * as allure from 'allure-js-commons';
+import { randomTodoParams } from '../../utils/helpers';
 
 const api: Api = new Api();
 
@@ -74,10 +75,26 @@ test.describe(() => {
     await response.statusCode.shouldBe('OK');
     await response.shouldBeEmpty();
   });
+
+  test(`Создать todo`, { tag: '@challenges' }, async () => {
+    const TODO_PARAMS = randomTodoParams();
+    const response = await api.todo.createTodo(TODO_PARAMS);
+    await response.statusCode.shouldBe('Created');
+    await response.shouldHaveValidSchema();
+    await response.shouldHave({ property: 'title', value: TODO_PARAMS.title });
+    await response.shouldHave({
+      property: 'description',
+      value: TODO_PARAMS.description,
+    });
+    await response.shouldHave({
+      property: 'doneStatus',
+      value: TODO_PARAMS.doneStatus,
+    });
+  });
 });
 
 test.afterAll(`Проверить количество выполненных заданий`, async () => {
-  const TEST_COUNT = 8;
+  const TEST_COUNT = 9;
   const response = await api.challenges.get();
   await response.statusCode.shouldBe('OK');
   expect(

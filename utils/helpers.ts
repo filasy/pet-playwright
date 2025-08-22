@@ -1,15 +1,6 @@
 import { fakerRU as faker } from '@faker-js/faker';
 import { UserParams } from '../api-learnqa/user/UserParams';
-
-// export const createRandomUserParams = (): UserParams => {
-//   return {
-//     username: faker.internet.username(),
-//     firstName: faker.person.firstName(),
-//     lastName: faker.person.lastName(),
-//     email: faker.internet.email(),
-//     password: faker.internet.password(),
-//   };
-// };
+import { Todo } from '../api-challenges/todos/TodoResponse';
 
 export class UserBuilder {
   private new_user: Partial<UserParams> = {};
@@ -67,5 +58,13 @@ export function hexToRgb(hex: string) {
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
-  return `rgb(${r}, ${g}, ${b})`
+  return `rgb(${r}, ${g}, ${b})`;
 }
+
+export const randomTodoParams = (): Todo => {
+  return {
+    title: faker.book.title(),
+    description: faker.book.author(),
+    doneStatus: faker.datatype.boolean(),
+  };
+};
