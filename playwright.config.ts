@@ -86,7 +86,7 @@ export default defineConfig({
     },
     {
       name: 'challenges-API',
-      grep: new RegExp('@challenges'),
+      testMatch: 'tests/API/challenges.spec.ts',
       fullyParallel: false,
       use: {
         baseURL: 'https://apichallenges.herokuapp.com/',
