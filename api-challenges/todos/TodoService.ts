@@ -1,6 +1,8 @@
 import test from '@playwright/test';
 import { ApiRoute } from '../../api-learnqa/BaseApiRoute';
 import {
+  ErrorMessagesResponse,
+  ErrorMessagesResponseSchema,
   Todo,
   TodoSchema,
   TodosResponse,
@@ -51,6 +53,18 @@ export class TodoService extends ApiRoute {
         { body: todoParams },
       );
       response.setSchema(TodoSchema);
+      return response;
+    });
+  }
+
+  public async createTodoWithInvalidParams(todoParams: Record<string, any>){
+    return test.step(`Создать todo с данными ${JSON.stringify(todoParams, null, 2)}`, async () => {
+      const response = await this.apiClient.sendRequest<ErrorMessagesResponse>(
+        'POST',
+        this.url,
+        { body: todoParams },
+      );
+      response.setSchema(ErrorMessagesResponseSchema);
       return response;
     });
   }

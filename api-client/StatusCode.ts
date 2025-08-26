@@ -5,6 +5,7 @@ const STATUS_CODES = {
   'Created': 201,
   'Bad Request': 400,
   'Not Found': 404,
+  'Request Entity Too Large': 413,
   'Internal Server Error': 500,
 } as const;
 

@@ -1,4 +1,5 @@
 import { Api } from '../../api-challenges/API';
+import { FailedValidation } from '../../api-challenges/todos/TodoResponse';
 import { expect, test } from '../../fixtures/API';
 import { TodoBuilder } from '../../utils/builders/todo.builder';
 
@@ -9,7 +10,7 @@ test.beforeAll(`1. Получить и установить токен`, async (
 });
 
 test.afterAll(` Проверить количество выполненных заданий`, async () => {
-  const TEST_COUNT = 10;
+  const TEST_COUNT = 16;
   const response = await api.challenges.get();
   await response.statusCode.shouldBe('OK');
   expect(
@@ -32,7 +33,7 @@ test('3. [GET] Получить список todo', async () => {
 });
 
 test(
-  '4. [GET] Получить список todo. Ошибка в end point',
+  '4. [GET] Получить список todo. Ошибка в end point.',
   { tag: '@negative' },
   async () => {
     const response = await api.todo.getTodoWrong();
@@ -50,7 +51,7 @@ test('5. [GET] Получить todo по id', async () => {
 });
 
 test(
-  '6. [GET] Получить todo по id. Не существует id',
+  '6. [GET] Получить todo по id. Не существует id.',
   { tag: '@negative' },
   async () => {
     const WRONG_ID = 100500;
@@ -89,7 +90,7 @@ test('8. [HEAD]  Получить только заголовки запроса
   await response.shouldBeEmpty();
 });
 
-test(`9. [POST] Создать todo`, async () => {
+test(`9. [POST] Создать todo c валидными данными`, async () => {
   const TODO = TodoBuilder.create().withAll().build();
   const response = await api.todo.createTodo(TODO);
   //asserts
@@ -105,3 +106,89 @@ test(`9. [POST] Создать todo`, async () => {
     value: TODO.doneStatus,
   });
 });
+
+test(
+  `10. [POST] Создать todo. Неверный тип doneStatus.`,
+  { tag: '@negative' },
+  async () => {
+    const TODO = {
+      title: 'title',
+      description: 'description',
+      doneStatus: 'invalid',
+    };
+    const response = await api.todo.createTodoWithInvalidParams(TODO);
+    await response.statusCode.shouldBe('Bad Request');
+    await response.shouldHaveValidSchema();
+    await response.shouldHave({
+      property: 'errorMessages',
+      value: [FailedValidation.DONESTATUS_INVALID_TYPE],
+    });
+  },
+);
+
+test(
+  `11. [POST] Создать todo. Слишком длинный title.`,
+  { tag: '@negative' },
+  async () => {
+    const TODO = TodoBuilder.create().withAll().addTitle(51).build();
+    const response = await api.todo.createTodoWithInvalidParams(TODO);
+    await response.statusCode.shouldBe('Bad Request');
+    await response.shouldHaveValidSchema();
+    await response.shouldHave({
+      property: 'errorMessages',
+      value: [FailedValidation.TITLE_TOO_LONG],
+    });
+  },
+);
+
+test(
+  `12. [POST] Создать todo. Слишком длинный description.`,
+  { tag: '@negative' },
+  async () => {
+    const TODO = TodoBuilder.create().withAll().addDescription(201).build();
+    const response = await api.todo.createTodoWithInvalidParams(TODO);
+    await response.statusCode.shouldBe('Bad Request');
+    await response.shouldHaveValidSchema();
+    await response.shouldHave({
+      property: 'errorMessages',
+      value: [FailedValidation.DESCRIPTION_TOO_LONG],
+    });
+  },
+);
+
+test(`13. [POST] Создать todo. Граничные значения title и description.`, async () => {
+  const TODO = TodoBuilder.create().addTitle(50).addDescription(200).build();
+  const response = await api.todo.createTodo(TODO);
+  await response.statusCode.shouldBe('Created');
+  await response.shouldHaveValidSchema();
+});
+
+test(
+  `14. [POST] Создать todo. Слишком длинный content.`,
+  { tag: '@negative' },
+  async () => {
+    const TODO = TodoBuilder.create().withAll().addDescription(5000).build();
+    const response = await api.todo.createTodoWithInvalidParams(TODO);
+    await response.statusCode.shouldBe('Request Entity Too Large');
+    await response.shouldHaveValidSchema();
+    await response.shouldHave({
+      property: 'errorMessages',
+      value: [FailedValidation.CONTENT_TOO_LONG],
+    });
+  },
+);
+
+test(
+  `15. [POST] Создать todo. Лишнее свойство в объекте todo.`,
+  { tag: '@negative' },
+  async () => {
+    const TODO = { title: 'a title', priority: 'extra' };
+    const response = await api.todo.createTodoWithInvalidParams(TODO);
+    await response.statusCode.shouldBe('Bad Request');
+    await response.shouldHaveValidSchema();
+    await response.shouldHave({
+      property: 'errorMessages',
+      value: [FailedValidation.COOULD_NOT_FIND_FIELD],
+    });
+  },
+);

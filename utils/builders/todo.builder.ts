@@ -16,13 +16,13 @@ export class TodoBuilder {
     };
   }
 
-  addTitle(title?: string) {
-    this.todo.title = title || faker.lorem.words(1);
+  addTitle(length: number = 25, title?: string) {
+    this.todo.title = title || faker.string.alpha(length);
     return this;
   }
 
-  addDescription(description?: string) {
-    this.todo.description = description || faker.lorem.words(1);
+  addDescription(length: number = 25, description?: string) {
+    this.todo.description = description || faker.string.alpha(length);
     return this;
   }
 

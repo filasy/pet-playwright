@@ -11,7 +11,6 @@ export class PlaywrightApiClient implements ApiClient {
     }
     return this._apiContext;
   }
-
   async sendRequest<T extends Record<string, unknown> | string>(
     method: HttpMetod,
     url: string,

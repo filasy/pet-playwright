@@ -1,5 +1,13 @@
 import { JSONSchemaType } from 'ajv';
 
+export const enum FailedValidation {
+  TITLE_TOO_LONG = 'Failed Validation: Maximum allowable length exceeded for title - maximum allowed is 50',
+  DESCRIPTION_TOO_LONG = 'Failed Validation: Maximum allowable length exceeded for description - maximum allowed is 200',
+  DONESTATUS_INVALID_TYPE = 'Failed Validation: doneStatus should be BOOLEAN but was STRING',
+  CONTENT_TOO_LONG = 'Error: Request body too large, max allowed is 5000 bytes',
+  COOULD_NOT_FIND_FIELD = 'Could not find field: priority'
+}
+
 export type Todo = {
   title: string;
   description: string;
@@ -13,6 +21,10 @@ export type TodoWithId = Todo & {
 export type TodosResponse = {
   todos?: TodoWithId[];
   errorMessages?: string[];
+};
+
+export type ErrorMessagesResponse = {
+  errorMessages: string[];
 };
 
 export const TodoSchema: JSONSchemaType<TodoWithId> = {
@@ -43,3 +55,17 @@ export const TodosResponseSchema: JSONSchemaType<TodosResponse> = {
   },
   additionalProperties: false,
 };
+
+export const ErrorMessagesResponseSchema: JSONSchemaType<ErrorMessagesResponse> =
+  {
+    type: 'object',
+    properties: {
+      errorMessages: {
+        type: 'array',
+        items: { type: 'string' },
+        nullable: false,
+      },
+    },
+    required: ['errorMessages'],
+    additionalProperties: false,
+  };
