@@ -1,0 +1,186 @@
+# Page snapshot
+
+```yaml
+- img
+- banner:
+  - button "Закрыть меню навигации":
+    - img
+  - button "RUTUBE":
+    - img "RUTUBE"
+  - textbox "Поиск"
+  - button "Виртуальная клавиатура":
+    - img
+  - img
+  - button "Добавить":
+    - img
+  - button "Уведомления":
+    - img
+  - button "Переключить на светлую тему"
+  - button "Безопасный режим":
+    - paragraph:
+      - img
+      - text: Безопасный режим
+  - img "Иконка канала channel67627961"
+- navigation:
+  - list:
+    - listitem:
+      - link "Главная"
+    - listitem:
+      - link "RUTUBE для блогеров":
+        - /url: /for_creators
+    - listitem:
+      - link "Каталог":
+        - /url: /categories/
+    - listitem:
+      - link "Популярное":
+        - /url: /tags/video/4996/
+    - listitem:
+      - link "В топе":
+        - /url: /feeds/top/
+    - listitem:
+      - link "Shorts":
+        - /url: /shorts/
+    - listitem:
+      - link "ТВ онлайн":
+        - /url: /feeds/live/
+    - listitem:
+      - link "Трансляции":
+        - /url: /feeds/stream/
+    - listitem:
+      - link "Моё":
+        - /url: /my/
+    - listitem:
+      - link "Фильмы":
+        - /url: /feeds/movies/
+    - listitem:
+      - link "Спорт":
+        - /url: /feeds/sport/
+    - listitem:
+      - link "RUTUBE x PREMIER":
+        - /url: /feeds/premier/
+  - separator
+  - button "Активировать промокод"
+  - separator
+  - region "Моё":
+    - button "Моё":
+      - text: Моё
+      - img
+    - list "Моё":
+      - listitem:
+        - link "Подписки":
+          - /url: /my/subscriptions/
+      - listitem:
+        - link "История просмотра":
+          - /url: /my/history/
+      - listitem:
+        - link "Плейлисты":
+          - /url: /my/playlists/
+      - listitem:
+        - link "Смотреть позже":
+          - /url: /my/future/
+      - listitem:
+        - link "Комментарии":
+          - /url: /my/comments/
+      - listitem:
+        - link "Понравилось":
+          - /url: /my/liked/
+  - separator
+  - region "По темам":
+    - button "По темам":
+      - text: По темам
+      - img
+  - separator
+  - region "Cкачать приложения":
+    - text: RUTUBE всегда с вами
+    - list "RUTUBE всегда с вами":
+      - listitem:
+        - link "Установить из Google Play":
+          - /url: https://redirect.appmetrica.yandex.com/serve/822089280250761172?client_id=1756208287918546392&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app&user_id=67627961
+      - listitem:
+        - link "Ярлык для iOS":
+          - /url: https://rutube.ru/info/rutubeapp/
+      - listitem:
+        - link "Установить из Huawei App Gallery":
+          - /url: https://redirect.appmetrica.yandex.com/serve/389285442492612095?user_id=67627961&client_id=1756208287918546392&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+      - listitem:
+        - link "Установить из RuStore":
+          - /url: https://redirect.appmetrica.yandex.com/serve/533400622968373086?user_id=67627961&client_id=1756208287918546392&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+      - listitem:
+        - link "Установить из RuMarket":
+          - /url: https://redirect.appmetrica.yandex.com/serve/389285425212041727?user_id=67627961&client_id=1756208287918546392&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+      - listitem:
+        - link "Установить из Galaxy Store":
+          - /url: https://redirect.appmetrica.yandex.com/serve/605458194927465783?user_id=67627961&client_id=1756208287918546392&utm_source=rutube.ru&utm_medium=referral&utm_campaign=landing_app
+  - text: Больше от RUTUBE
+  - list "Секция инструкции":
+    - listitem:
+      - link "SMART TV":
+        - /url: /smarttv/
+    - listitem:
+      - link "RUTUBE Детям":
+        - /url: /rutube_for_kids/
+    - listitem:
+      - link "RUTUBE Спорт":
+        - /url: https://rutube.sport/
+    - listitem:
+      - link "RUTUBE Новости":
+        - /url: https://rutube.news/
+  - text: RUTUBE в других соцсетях
+  - list "Присоединяйтесь в социальных сетях":
+    - listitem:
+      - link "VK":
+        - /url: https://vk.com/rutube
+    - listitem:
+      - link "OK":
+        - /url: https://ok.ru/rutube
+    - listitem:
+      - link "Telegram":
+        - /url: https://t.me/rutube
+    - listitem:
+      - link "Дзен":
+        - /url: https://dzen.ru/rutube
+  - separator
+  - list "Оставте отзыв":
+    - listitem:
+      - link "Вопросы и ответы":
+        - /url: /info/faq/
+    - listitem:
+      - link "Сообщить о проблеме":
+        - /url: /forms/problem/
+    - listitem:
+      - link "Написать в поддержку":
+        - /url: mailto:help@rutube.ru?subject=Запрос в поддержку RUTUBE
+  - region "Футер":
+    - list:
+      - listitem:
+        - link "О RUTUBE":
+          - /url: /info/about_company/
+      - listitem:
+        - link "Направления деятельности":
+          - /url: /info/activities/
+      - listitem:
+        - link "Пользовательское соглашение":
+          - /url: /info/agreement/
+      - listitem:
+        - link "Конфиденциальность":
+          - /url: /info/privacy/
+      - listitem:
+        - link "Правовая информация":
+          - /url: /info/legal/
+      - listitem:
+        - link "Рекомендательная система":
+          - /url: /info/recomlegal/
+      - listitem:
+        - link "Фирменный стиль":
+          - /url: /brand/
+    - paragraph: © 2025, RUTUBE
+- img
+- img
+- img
+- heading "Показывать пуш-уведомления?" [level=2]
+- paragraph: Вы будете сразу узнавать о новых видео на каналах любимых авторов, реакциях и ответах на комментарии
+- button "Не надо":
+  - paragraph: Не надо
+- button "Да, показывать":
+  - paragraph: Да, показывать
+```
