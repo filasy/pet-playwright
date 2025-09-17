@@ -1,6 +1,14 @@
 import { test } from '@playwright/test';
 import { ApiRoute } from '../BaseApiRoute';
-import { UserParams, CreateUserResponse, GetUserAuthResponse, UserInfoResponse, UserInfoSchema, SuccessResponse, ResponseSchema} from './index';
+import {
+  UserParams,
+  CreateUserResponse,
+  GetUserAuthResponse,
+  UserInfoResponse,
+  UserInfoSchema,
+  SuccessResponse,
+  ResponseSchema,
+} from './index';
 
 export class User extends ApiRoute {
   public async delete(id: string | number) {
@@ -30,7 +38,7 @@ export class User extends ApiRoute {
         'PUT',
         `${this.url}`,
         {
-          params: {id: userId},
+          params: { id: userId },
           body: updateUserParams,
         },
       );

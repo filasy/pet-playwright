@@ -2,6 +2,7 @@ import { JSONSchemaType } from 'ajv';
 
 export const enum FailedValidation {
   TITLE_TOO_LONG = 'Failed Validation: Maximum allowable length exceeded for title - maximum allowed is 50',
+  // eslint-disable-next-line @stylistic/max-len
   DESCRIPTION_TOO_LONG = 'Failed Validation: Maximum allowable length exceeded for description - maximum allowed is 200',
   DONESTATUS_INVALID_TYPE = 'Failed Validation: doneStatus should be BOOLEAN but was STRING',
   CONTENT_TOO_LONG = 'Error: Request body too large, max allowed is 5000 bytes',

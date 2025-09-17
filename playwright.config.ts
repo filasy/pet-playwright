@@ -43,10 +43,10 @@ export default defineConfig({
     ...devices['Desktop Chrome'],
     proxy: isCI
       ? {
-          server: process.env.PROXY_IP!,
-          username: process.env.PROXY_LOGIN!,
-          password: process.env.PROXY_PASSWORD!,
-        }
+        server: process.env.PROXY_IP!,
+        username: process.env.PROXY_LOGIN!,
+        password: process.env.PROXY_PASSWORD!,
+      }
       : undefined,
   },
 

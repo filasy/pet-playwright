@@ -12,6 +12,7 @@ import typescript from '@typescript-eslint/eslint-plugin';
 import playwright from 'eslint-plugin-playwright';
 import typescriptParser from '@typescript-eslint/parser';
 const { configs: typescriptConfigs } = typescript;
+import stylistic from '@stylistic/eslint-plugin';
 
 export default [
   {
@@ -19,6 +20,7 @@ export default [
     plugins: {
       '@typescript-eslint': typescript,
       'playwright': playwright,
+      '@stylistic': stylistic,
     },
     languageOptions: {
       parser: typescriptParser,
@@ -27,16 +29,22 @@ export default [
         sourceType: 'module',
       },
     },
+
     rules: {
-      ...typescriptConfigs.recommended.rules,
+      // ...typescriptConfigs.recommended.rules,
       ...playwright.configs['flat/recommended'].rules,
       'no-console': 'warn',
-      'playwright/expect-expect': [
-        'warn',
-        {
-          assertFunctionNames: ['expext', 'shouldBe', 'shouldHave'],
-        },
-      ],
+      'playwright/expect-expect': 'off',
+      'playwright/no-conditional-in-test': 'off',
+      '@stylistic/semi': 'error',
+      '@stylistic/max-len': ['warn', { 'code': 120, ignoreUrls: true }],
+      '@stylistic/no-trailing-spaces': 'error',
     },
   },
+  // stylistic.configs.customize({
+  //   'quoteProps': 'preserve',
+  //   'tabWidth': 2,
+  //   'singleQuote': true,
+  //   'bracketSameLine': true,
+  // }),
 ];

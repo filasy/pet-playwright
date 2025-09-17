@@ -5,7 +5,7 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { App } from '../../fixtures/App';
 chromium.use(StealthPlugin());
 
-test('Аутентификация', async () => {
+test('Аутентификация', {}, async () => {
   const browser = await chromium.launch();
   const context = await browser.newContext();
   const page = await context.newPage();
