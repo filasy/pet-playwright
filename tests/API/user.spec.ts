@@ -1,5 +1,6 @@
 import { test } from '../../fixtures/API';
 import { UserBuilder } from '../../utils/builders/user.builder';
+import { testit } from 'testit-adapter-playwright';
 
 test.describe('Авторизованный пользователь', { tag: '@learnqa' }, () => {
   test('Получить userId после логина', async ({ authApi }) => {
@@ -38,23 +39,23 @@ test.describe('Авторизованный пользователь', { tag: '@
     await getUserInfo.shouldHaveValidSchema();
   });
 
-  test(
-    'Запрещено удаление чужого аккаунта',
-    { tag: '@negative' },
-    async ({ authApi }) => {
-      const response = await authApi.user.delete('100500');
-      await response.statusCode.shouldBe('Bad Request');
-      await response.shouldHave({
-        property: 'error',
-        value: 'This user can only delete their own account.',
-      });
-      await response.shouldHaveValidSchema();
-    },
-  );
+  test('Запрещено удаление чужого аккаунта', { tag: '@negative' }, async ({ authApi }) => {
+    const response = await authApi.user.delete('100500');
+    await response.statusCode.shouldBe('Bad Request');
+    await response.shouldHave({
+      property: 'error',
+      value: 'This user can only delete their own account.',
+    });
+    await response.shouldHaveValidSchema();
+  });
 });
 
 test.describe('Неавторизованный пользователь', { tag: '@learnqa' }, () => {
   test('Запрещено удаление аккаунта', { tag: '@negative' }, async ({ api }) => {
+    // testit.workItemIds(['abad7c4c-1656-4609-9487-3417835c94bb']);
+    testit.namespace(__dirname.split('/').pop()!);
+    testit.classname(__filename.split('/').pop()!);
+
     const response = await api.user.delete('100500');
     await response.statusCode.shouldBe('Bad Request');
     await response.shouldHave({

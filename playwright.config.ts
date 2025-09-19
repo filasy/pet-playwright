@@ -34,6 +34,7 @@ export default defineConfig({
         outputFile: '.test/output/monocart-report/index.html',
       },
     ],
+    // ['testit-adapter-playwright'],
     // ['./utils/slowStepReporter.ts'],
   ],
   use: {
