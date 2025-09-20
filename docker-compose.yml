@@ -7,7 +7,7 @@ services:
     image: playwright-tests
     volumes:
       - .:/tests
-      #- node_modules:/tests/node_modules
+      - node_modules:/tests/node_modules
     command: npx playwright test
     environment:
       - LOGIN=${LOGIN}
@@ -15,5 +15,5 @@ services:
       - PROXY_IP=${PROXY_IP}
       - PROXY_LOGIN=${PROXY_LOGIN}
       - PROXY_PASSWORD=${PROXY_PASSWORD}
-#volumes:
- # node_modules:
+volumes:
+  node_modules:
